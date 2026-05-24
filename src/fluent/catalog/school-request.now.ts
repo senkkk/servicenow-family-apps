@@ -14,7 +14,6 @@ export const schoolRequestCatalogItem = CatalogItem({
     description: '学校の配布物や連絡で、購入・準備・署名・提出・支払いなど親の対応が必要なときに使います。',
     catalogs: [familyCatalog],
     categories: [schoolRequestsCategory],
-    flow: Now.ref('sys_hub_flow', 'school_request_parent_fulfillment_flow'),
     requestMethod: 'submit',
     availability: 'both',
     hideAddToCart: true,
