@@ -1,0 +1,6 @@
+{
+  "scope": "x_144721_family_ap",
+  "scopeId": "8ed372fb2c434efa9080c0c241ba90b9",
+  "name": "Family Apps",
+  "tsconfigPath": "./src/server/tsconfig.json"
+}
