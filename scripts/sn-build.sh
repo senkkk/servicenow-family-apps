@@ -3,6 +3,17 @@ set -Eeuo pipefail
 
 SN_SDK_VERSION="${SN_SDK_VERSION:-4.6.1}"
 
+if [ -f .nvmrc ]; then
+  export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+  if [ -s "$NVM_DIR/nvm.sh" ]; then
+    # shellcheck disable=SC1091
+    . "$NVM_DIR/nvm.sh" --no-use
+    nvm use
+  else
+    echo "[sn-build] .nvmrc found, but nvm is not available at $NVM_DIR/nvm.sh. Continuing with $(node -v)."
+  fi
+fi
+
 echo "[sn-build] Installing project dependencies"
 if [ -f package-lock.json ]; then
   npm ci

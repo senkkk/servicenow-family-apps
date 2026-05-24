@@ -1,3 +1,4 @@
+import '@servicenow/sdk/global'
 import { ServicePortal, SPMenu, SPPage } from '@servicenow/sdk/core'
 
 const OOTB = {
@@ -27,6 +28,19 @@ export const familyPortalHomePage = SPPage({
     pageId: 'family-home',
     title: 'Family Portal',
     shortDescription: 'Family self-service landing page using out-of-the-box Service Portal widgets.',
+    css: `
+.family-home-image {
+    min-height: 360px;
+    background-position: center;
+    border-radius: 6px;
+}
+
+@media (max-width: 767px) {
+    .family-home-image {
+        min-height: 220px;
+    }
+}
+`,
     containers: [
         {
             $id: 'family_home_search_container',
@@ -51,6 +65,30 @@ export const familyPortalHomePage = SPPage({
                                     order: 100,
                                 },
                             ],
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            $id: 'family_home_image_container',
+            name: 'Family Image',
+            width: 'container',
+            backgroundImage: Now.attach('../assets/family-portal-home.png'),
+            backgroundStyle: 'cover',
+            cssClass: 'family-home-image',
+            order: 150,
+            rows: [
+                {
+                    $id: 'family_home_image_row',
+                    order: 100,
+                    columns: [
+                        {
+                            $id: 'family_home_image_column',
+                            size: 12,
+                            sizeXs: 12,
+                            order: 100,
+                            instances: [],
                         },
                     ],
                 },

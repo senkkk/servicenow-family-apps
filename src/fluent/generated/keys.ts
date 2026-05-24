@@ -33,6 +33,18 @@ declare global {
                         table: 'sp_instance'
                         id: 'c5df50f3f5a94f4cbc36295e5a0c56d5'
                     }
+                    family_home_image_column: {
+                        table: 'sp_column'
+                        id: '154ec4e78aa540b58bfd3c7022148387'
+                    }
+                    family_home_image_container: {
+                        table: 'sp_container'
+                        id: '7fdea344bdad4fe1973a607306939df1'
+                    }
+                    family_home_image_row: {
+                        table: 'sp_row'
+                        id: '40847557537b45aabfa0be519f3a6ecf'
+                    }
                     family_home_profile_column: {
                         table: 'sp_column'
                         id: '6f5e89e9425a4e6aa6d4db739d96dbec'
