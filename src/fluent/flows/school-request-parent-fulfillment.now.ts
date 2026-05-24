@@ -1,5 +1,4 @@
 import { action, Flow, trigger, wfa } from '@servicenow/sdk/automation'
-import { parentResponseGroupPropertyName } from '../properties/family-properties.now'
 
 export const schoolRequestParentFulfillmentFlow = Flow(
     {
@@ -18,7 +17,7 @@ export const schoolRequestParentFulfillmentFlow = Flow(
             { $id: Now.ID['lookup_parent_response_group_property'] },
             {
                 table: 'sys_properties',
-                conditions: `name=${parentResponseGroupPropertyName}`,
+                conditions: 'name=x_144721_family_ap.parent_response_group',
             }
         )
 
