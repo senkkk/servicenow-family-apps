@@ -1,5 +1,6 @@
 import '@servicenow/sdk/global'
 import { ServicePortal, SPMenu, SPPage } from '@servicenow/sdk/core'
+import { familyCatalog } from './catalog/family-catalog.now'
 
 const OOTB = {
     theme: {
@@ -26,8 +27,8 @@ const OOTB = {
 
 export const familyPortalHomePage = SPPage({
     pageId: 'family-home',
-    title: 'Family Portal',
-    shortDescription: 'Family self-service landing page using out-of-the-box Service Portal widgets.',
+    title: 'ファミリーポータル',
+    shortDescription: '家族向けセルフサービスのホームページです。',
     css: `
 .family-home-search-hero {
     min-height: 360px;
@@ -63,7 +64,7 @@ export const familyPortalHomePage = SPPage({
     containers: [
         {
             $id: 'family_home_search_container',
-            name: 'Search',
+            name: '検索',
             width: 'container',
             backgroundImage: Now.attach('../assets/family-portal-home.png'),
             backgroundStyle: 'cover',
@@ -94,7 +95,7 @@ export const familyPortalHomePage = SPPage({
         },
         {
             $id: 'family_home_activity_container',
-            name: 'Activity',
+            name: 'アクティビティ',
             width: 'container',
             order: 200,
             rows: [
@@ -112,7 +113,7 @@ export const familyPortalHomePage = SPPage({
                                 {
                                     $id: 'family_home_requests_instance',
                                     id: 'family-home-requests',
-                                    title: 'My Requests',
+                                    title: '自分の申請',
                                     widget: OOTB.widget.myRequests,
                                     glyph: 'list',
                                     order: 100,
@@ -129,7 +130,7 @@ export const familyPortalHomePage = SPPage({
                                 {
                                     $id: 'family_home_approvals_instance',
                                     id: 'family-home-approvals',
-                                    title: 'Approvals',
+                                    title: '承認',
                                     widget: OOTB.widget.approvals,
                                     glyph: 'check-square-o',
                                     order: 100,
@@ -146,7 +147,7 @@ export const familyPortalHomePage = SPPage({
                                 {
                                     $id: 'family_home_profile_instance',
                                     id: 'family-home-profile',
-                                    title: 'Profile',
+                                    title: 'プロフィール',
                                     widget: OOTB.widget.userProfile,
                                     glyph: 'user',
                                     order: 100,
@@ -162,12 +163,12 @@ export const familyPortalHomePage = SPPage({
 
 export const familyPortalMainMenu = SPMenu({
     $id: 'family_portal_main_menu',
-    title: 'Family Portal Menu',
+    title: 'ファミリーポータルメニュー',
     widget: OOTB.widget.headerMenu,
     items: [
         {
             $id: 'family_portal_menu_home',
-            label: 'Home',
+            label: 'ホーム',
             type: 'page',
             page: familyPortalHomePage,
             glyph: 'home',
@@ -175,7 +176,7 @@ export const familyPortalMainMenu = SPMenu({
         },
         {
             $id: 'family_portal_menu_catalog',
-            label: 'Requests',
+            label: '申請',
             type: 'page',
             page: OOTB.page.catalog,
             glyph: 'briefcase',
@@ -183,7 +184,7 @@ export const familyPortalMainMenu = SPMenu({
         },
         {
             $id: 'family_portal_menu_my_requests',
-            label: 'Status',
+            label: '状況',
             type: 'page',
             page: OOTB.page.requests,
             glyph: 'list',
@@ -191,7 +192,7 @@ export const familyPortalMainMenu = SPMenu({
         },
         {
             $id: 'family_portal_menu_approvals',
-            label: 'Approvals',
+            label: '承認',
             type: 'page',
             page: OOTB.page.approvals,
             glyph: 'check-square-o',
@@ -199,7 +200,7 @@ export const familyPortalMainMenu = SPMenu({
         },
         {
             $id: 'family_portal_menu_knowledge',
-            label: 'Knowledge',
+            label: 'ナレッジ',
             type: 'page',
             page: OOTB.page.knowledge,
             glyph: 'book',
@@ -210,7 +211,7 @@ export const familyPortalMainMenu = SPMenu({
 
 export const familyPortal = ServicePortal({
     $id: 'family_portal',
-    title: 'Family Portal',
+    title: 'ファミリーポータル',
     urlSuffix: 'family',
     theme: OOTB.theme.coral,
     mainMenu: familyPortalMainMenu,
@@ -218,6 +219,13 @@ export const familyPortal = ServicePortal({
     loginPage: OOTB.page.login,
     notFoundPage: OOTB.page.notFound,
     catalogHomePage: OOTB.page.catalog,
+    catalogs: [
+        {
+            catalog: familyCatalog,
+            order: 100,
+            active: true,
+        },
+    ],
     knowledgeHomePage: OOTB.page.knowledge,
     enableFavorites: true,
 })

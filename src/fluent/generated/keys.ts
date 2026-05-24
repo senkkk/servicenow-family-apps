@@ -13,9 +13,21 @@ declare global {
                         table: 'sys_script'
                         id: '501afd7d9f0a4681928b72a50c4ba1db'
                     }
+                    close_school_request_item: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '5923265574ed400cb67def814c1fdb6b'
+                    }
+                    create_parent_response_task: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '69b21eec53384d7a81955d31ce7ddb7d'
+                    }
                     cs0: {
                         table: 'sys_script_client'
                         id: 'd8ea9ae97ede42558528ca30e8246ba1'
+                    }
+                    family_catalog: {
+                        table: 'sc_catalog'
+                        id: 'd8293035f1644bb8b454120fb8829aca'
                     }
                     family_home_activity_container: {
                         table: 'sp_container'
@@ -93,9 +105,33 @@ declare global {
                         table: 'sp_rectangle_menu_item'
                         id: 'd0f3d422536b4b7493f0d6a428cce22f'
                     }
+                    lookup_parent_response_group_property: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '13c6f1759b044965a7a788e355741fa5'
+                    }
                     package_json: {
                         table: 'sys_module'
                         id: 'e32df436d6224a008e9dd718bac9bfa3'
+                    }
+                    parent_response_group_property: {
+                        table: 'sys_properties'
+                        id: 'c04119f3d7344bc9a577f83e17a3f377'
+                    }
+                    school_request_catalog_item: {
+                        table: 'sc_cat_item'
+                        id: '0d2c04d8f9c14bc19802e40abf0bae34'
+                    }
+                    school_request_catalog_trigger: {
+                        table: 'sys_hub_trigger_instance_v2'
+                        id: '66b7510fb5924851b17575fbebcbd9a6'
+                    }
+                    school_request_parent_fulfillment_flow: {
+                        table: 'sys_hub_flow'
+                        id: '66b7e034be624495948ec8d12f7c81f0'
+                    }
+                    school_requests_category: {
+                        table: 'sc_category'
+                        id: 'cf91d54e77004536a7335ca9cda42128'
                     }
                     src_server_script_ts: {
                         table: 'sys_module'
@@ -104,10 +140,168 @@ declare global {
                 }
                 composite: [
                     {
+                        table: 'question_choice'
+                        id: '03ded53976184b5fa46f294ef40f53cc'
+                        key: {
+                            question: {
+                                id: 'd8d52d48362b4b4ba939f9dca029fc06'
+                                key: {
+                                    cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'sign_or_submit'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '280897705be247df8f8023c027480c9a'
+                        key: {
+                            question: {
+                                id: 'd8d52d48362b4b4ba939f9dca029fc06'
+                                key: {
+                                    cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'payment'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_category'
+                        id: '3b6e3515436c49baa436dda5bb514c1d'
+                        key: {
+                            sc_cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            sc_category: 'cf91d54e77004536a7335ca9cda42128'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_catalog'
+                        id: '3bf41a9817cb42efbe2b59c889a84c53'
+                        key: {
+                            sc_cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            sc_catalog: 'd8293035f1644bb8b454120fb8829aca'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '689250d6f9394ca8be2c77e5daa930d6'
+                        key: {
+                            cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            variable_set: 'NULL'
+                            name: 'request_title'
+                        }
+                    },
+                    {
                         table: 'sp_page'
                         id: '6db96c9005a247628f8f34cbd5b7baeb'
                         key: {
                             id: 'family-home'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '78980af99eb44b07b767b71502925730'
+                        key: {
+                            cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            variable_set: 'NULL'
+                            name: 'due_date'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '84b7e6eadb7748d3b99027fe63ef3d49'
+                        deleted: true
+                        key: {
+                            cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            variable_set: 'NULL'
+                            name: 'child_name'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '93d4ccf08ea3499b9af8802124d41626'
+                        key: {
+                            cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            variable_set: 'NULL'
+                            name: 'requested_action'
+                        }
+                    },
+                    {
+                        table: 'm2m_sp_portal_catalog'
+                        id: 'a30439759f724fb6a1c0e0168efd5f79'
+                        key: {
+                            sp_portal: '588c32b53ab34154808b5cf37c455855'
+                            sc_catalog: 'd8293035f1644bb8b454120fb8829aca'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: 'acf60d57c61a4701a88235de9c8357a7'
+                        key: {
+                            question: {
+                                id: 'd8d52d48362b4b4ba939f9dca029fc06'
+                                key: {
+                                    cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'other'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'c472eea8b13b41b58f6654ee11d0d60d'
+                        key: {
+                            cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            variable_set: 'NULL'
+                            name: 'source_summary'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'd0b40021cd1248fba0f95d7a80491a9c'
+                        key: {
+                            cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            variable_set: 'NULL'
+                            name: 'notes'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'd8d52d48362b4b4ba939f9dca029fc06'
+                        key: {
+                            cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            variable_set: 'NULL'
+                            name: 'request_type'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: 'da6d2f7258fb47fd887123add3b79291'
+                        key: {
+                            question: {
+                                id: 'd8d52d48362b4b4ba939f9dca029fc06'
+                                key: {
+                                    cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'purchase'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'f7d56cda2dbd43049396e57f7e9ef8d0'
+                        deleted: true
+                        key: {
+                            cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            variable_set: 'NULL'
+                            name: 'school_name'
                         }
                     },
                 ]
