@@ -15,7 +15,7 @@ export const schoolRequestCatalogItem = CatalogItem({
     catalogs: [familyCatalog],
     categories: [schoolRequestsCategory],
     flow: Now.ref('sys_hub_flow', 'school_request_parent_fulfillment_flow'),
-    requestMethod: 'request',
+    requestMethod: 'submit',
     availability: 'both',
     hideAddToCart: true,
     hideQuantitySelector: true,
