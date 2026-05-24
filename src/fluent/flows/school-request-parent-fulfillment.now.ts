@@ -1,4 +1,5 @@
 import { action, Flow, trigger, wfa } from '@servicenow/sdk/automation'
+import { schoolRequestCatalogItem } from '../catalog/school-request.now'
 
 export const schoolRequestParentFulfillmentFlow = Flow(
     {
@@ -8,7 +9,9 @@ export const schoolRequestParentFulfillmentFlow = Flow(
         runAs: 'system',
         flowPriority: 'MEDIUM',
     },
-    wfa.trigger(trigger.application.serviceCatalog, { $id: Now.ID['school_request_catalog_trigger'] }, {
+    wfa.trigger(trigger.record.created, { $id: Now.ID['school_request_catalog_trigger'] }, {
+        table: 'sc_req_item',
+        condition: `cat_item=${schoolRequestCatalogItem}`,
         run_flow_in: 'background',
     }),
     (_params) => {
@@ -28,8 +31,8 @@ export const schoolRequestParentFulfillmentFlow = Flow(
                 task_table: 'sc_task',
                 wait: true,
                 field_values: TemplateValue({
-                    request_item: wfa.dataPill(_params.trigger.request_item, 'reference'),
-                    assignment_group: wfa.dataPill(parentGroupProperty.Record.value, 'reference'),
+                    request_item: wfa.dataPill(_params.trigger.current, 'reference'),
+                    assignment_group: wfa.dataPill(parentGroupProperty.Record.value, 'string'),
                     short_description: '学校からの依頼について親の対応が必要です',
                     description:
                         '申請内容と添付ファイルを確認してください。対応する場合は担当者を自分に設定し、子どもへの質問はコメントでやり取りしてください。対応が完了したらこのタスクを完了にしてください。',
@@ -43,7 +46,7 @@ export const schoolRequestParentFulfillmentFlow = Flow(
             { $id: Now.ID['close_school_request_item'] },
             {
                 table_name: 'sc_req_item',
-                record: wfa.dataPill(_params.trigger.request_item, 'reference'),
+                record: wfa.dataPill(_params.trigger.current, 'reference'),
                 values: TemplateValue({
                     state: '3',
                     stage: 'complete',
