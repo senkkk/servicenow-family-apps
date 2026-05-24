@@ -1,0 +1,40 @@
+name: Deploy ServiceNow SDK App on Main
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: servicenow-main-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to ServiceNow
+    runs-on: ubuntu-latest
+
+    env:
+      SN_SDK_INSTANCE_URL: ${{ secrets.SN_SDK_INSTANCE_URL }}
+      SN_SDK_USER: ${{ secrets.SN_SDK_USER }}
+      SN_SDK_USER_PWD: ${{ secrets.SN_SDK_USER_PWD }}
+      SN_SDK_NODE_ENV: SN_SDK_CI_INSTALL
+      SN_SDK_VERSION: latest
+      SN_REINSTALL: "false"
+      SN_OPEN_BROWSER: "false"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Deploy to ServiceNow
+        run: bash scripts/sn-install.sh
