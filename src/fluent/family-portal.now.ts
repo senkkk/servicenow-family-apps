@@ -29,15 +29,34 @@ export const familyPortalHomePage = SPPage({
     title: 'Family Portal',
     shortDescription: 'Family self-service landing page using out-of-the-box Service Portal widgets.',
     css: `
-.family-home-image {
+.family-home-search-hero {
     min-height: 360px;
     background-position: center;
     border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.family-home-search-hero::before {
+    background: rgba(255, 255, 255, 0.68);
+    content: "";
+    inset: 0;
+    position: absolute;
+}
+
+.family-home-search-hero .row {
+    padding: 96px 24px;
+    position: relative;
+    z-index: 1;
 }
 
 @media (max-width: 767px) {
-    .family-home-image {
+    .family-home-search-hero {
         min-height: 220px;
+    }
+
+    .family-home-search-hero .row {
+        padding: 56px 16px;
     }
 }
 `,
@@ -46,6 +65,9 @@ export const familyPortalHomePage = SPPage({
             $id: 'family_home_search_container',
             name: 'Search',
             width: 'container',
+            backgroundImage: Now.attach('../assets/family-portal-home.png'),
+            backgroundStyle: 'cover',
+            cssClass: 'family-home-search-hero',
             order: 100,
             rows: [
                 {
@@ -65,30 +87,6 @@ export const familyPortalHomePage = SPPage({
                                     order: 100,
                                 },
                             ],
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            $id: 'family_home_image_container',
-            name: 'Family Image',
-            width: 'container',
-            backgroundImage: Now.attach('../assets/family-portal-home.png'),
-            backgroundStyle: 'cover',
-            cssClass: 'family-home-image',
-            order: 150,
-            rows: [
-                {
-                    $id: 'family_home_image_row',
-                    order: 100,
-                    columns: [
-                        {
-                            $id: 'family_home_image_column',
-                            size: 12,
-                            sizeXs: 12,
-                            order: 100,
-                            instances: [],
                         },
                     ],
                 },
