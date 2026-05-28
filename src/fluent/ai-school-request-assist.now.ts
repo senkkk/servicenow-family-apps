@@ -124,13 +124,14 @@ CatalogClientScript({
     active: true,
     catalogItem: schoolRequestCatalogItem,
     script: `function onLoad() {
-  if (window.__schoolRequestAiAssistMounted) return;
-  window.__schoolRequestAiAssistMounted = true;
+  var panelId = 'school_request_ai_assist_panel';
+  if (document.getElementById(panelId)) return;
 
   var root = document.querySelector('.sp-variable-layout') || document.querySelector('form');
   if (!root) return;
 
   var panel = document.createElement('div');
+  panel.id = panelId;
   panel.className = 'panel panel-default';
   panel.innerHTML = [
     '<div class="panel-heading"><strong>学校連絡AIアシスト（β）</strong></div>',
@@ -196,5 +197,5 @@ CatalogClientScript({
     g_form.setValue('notes', parsedResult.notes || '');
     g_form.addInfoMessage('AI変換結果をフォームへ反映しました。内容を確認してから申請してください。');
   });
-}`,
+}`
 })
