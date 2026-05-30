@@ -149,6 +149,10 @@ declare global {
                         table: 'catalog_script_client'
                         id: '48266a374a50404491c584a9f8e2d241'
                     }
+                    school_request_chat_assist_widget: {
+                        table: 'sp_widget'
+                        id: '1f24ac4a2f7d48f1a6616c6e4b0d0a8b'
+                    }
                     school_request_parent_fulfillment_flow: {
                         table: 'sys_hub_flow'
                         id: '66b7e034be624495948ec8d12f7c81f0'
@@ -316,6 +320,15 @@ declare global {
                                 }
                             }
                             value: 'purchase'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'e7440e6fc1544c089921392068b06938'
+                        key: {
+                            cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
+                            variable_set: 'NULL'
+                            name: 'ai_assist'
                         }
                     },
                     {
