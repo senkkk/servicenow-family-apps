@@ -50,8 +50,8 @@
         }
     }
 
-    function buildSystemPrompt(draft) {
-        return [
+    function buildConversationPrompt(draft, chatMessages) {
+        var lines = [
             'あなたは学校からの連絡をServiceNowの申請フォームに落とし込むための日本語チャットアシスタントです。',
             'ユーザーと何度か壁打ちしながら、保護者に依頼する内容を明確にしてください。',
             '毎回、会話に自然なassistant_messageを返しつつ、現時点の申請案draftも更新してください。',
@@ -62,42 +62,22 @@
             '',
             '現在の申請案:',
             JSON.stringify(draft || {}),
-        ].join('\n')
-    }
-
-    function toResponseInput(chatMessages, draft) {
-        var inputItems = [
-            {
-                role: 'system',
-                content: [
-                    {
-                        type: 'input_text',
-                        text: buildSystemPrompt(draft),
-                    },
-                ],
-            },
+            '',
+            '会話履歴:',
         ]
 
         var start = Math.max(0, chatMessages.length - 12)
         for (var i = start; i < chatMessages.length; i++) {
             var message = chatMessages[i] || {}
-            var role = message.role === 'assistant' ? 'assistant' : 'user'
+            var roleLabel = message.role === 'assistant' ? 'AI' : 'ユーザー'
             var text = (message.content || '').toString()
             if (!text) {
                 continue
             }
-            inputItems.push({
-                role: role,
-                content: [
-                    {
-                        type: role === 'assistant' ? 'output_text' : 'input_text',
-                        text: text,
-                    },
-                ],
-            })
+            lines.push(roleLabel + ': ' + text)
         }
 
-        return inputItems
+        return lines.join('\n')
     }
 
     function extractResponseText(parsed) {
@@ -125,7 +105,17 @@
         var payload = {
             model: deployment,
             store: false,
-            input: toResponseInput(messages, currentDraft),
+            input: [
+                {
+                    role: 'user',
+                    content: [
+                        {
+                            type: 'input_text',
+                            text: buildConversationPrompt(currentDraft, messages),
+                        },
+                    ],
+                },
+            ],
             text: {
                 format: {
                     type: 'json_schema',
