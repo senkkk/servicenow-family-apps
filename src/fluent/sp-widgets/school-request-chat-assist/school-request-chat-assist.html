@@ -1,0 +1,39 @@
+<div class="school-request-chat-assist panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">学校連絡AIアシスト（β）</h3>
+  </div>
+  <div class="panel-body">
+    <p class="text-muted">
+      学校から受領したテキストを貼り付けて「変換」を押してください。変換後に内容を確認し、「フォームへ反映」を押すと申請項目へ転記します。
+    </p>
+
+    <div class="form-group" ng-class="{'has-error': c.errorMessage}">
+      <label for="ai_school_source_text">学校からの連絡文</label>
+      <textarea
+        id="ai_school_source_text"
+        class="form-control"
+        rows="6"
+        ng-model="c.sourceText"
+        ng-disabled="c.loading"
+        placeholder="ここに学校からの連絡文を貼り付け"></textarea>
+      <p class="help-block" ng-if="c.errorMessage" ng-bind="c.errorMessage"></p>
+    </div>
+
+    <div class="school-request-chat-assist-actions">
+      <button type="button" class="btn btn-primary" ng-click="c.parse()" ng-disabled="c.loading">
+        <span ng-if="!c.loading">変換</span>
+        <span ng-if="c.loading">変換中...</span>
+      </button>
+      <button type="button" class="btn btn-default" ng-click="c.apply()" ng-disabled="!c.parsedResult || c.loading">
+        フォームへ反映
+      </button>
+    </div>
+
+    <div class="alert alert-success" ng-if="c.infoMessage" ng-bind="c.infoMessage"></div>
+
+    <div class="school-request-chat-assist-preview" ng-if="c.previewJson">
+      <h4>変換結果プレビュー</h4>
+      <pre ng-bind="c.previewJson"></pre>
+    </div>
+  </div>
+</div>

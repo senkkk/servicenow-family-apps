@@ -124,71 +124,16 @@ CatalogClientScript({
     active: true,
     catalogItem: schoolRequestCatalogItem,
     script: `function onLoad() {
-  var panelId = 'school_request_ai_assist_panel';
-  if (document.getElementById(panelId)) return;
+  var eventName = 'school-request-ai-assist.apply';
 
-  var root = document.querySelector('.sp-variable-layout') || document.querySelector('form');
-  if (!root) return;
+  if (window.schoolRequestChatAssistApplyHandler) {
+    window.removeEventListener(eventName, window.schoolRequestChatAssistApplyHandler);
+  }
 
-  var panel = document.createElement('div');
-  panel.id = panelId;
-  panel.className = 'panel panel-default';
-  panel.innerHTML = [
-    '<div class="panel-heading"><strong>学校連絡AIアシスト（β）</strong></div>',
-    '<div class="panel-body">',
-    '<p>学校から受領したテキストを貼り付けて「変換」を押してください。</p>',
-    '<textarea id="ai_school_source_text" class="form-control" rows="6" placeholder="ここに学校からの連絡文を貼り付け"></textarea>',
-    '<div style="margin-top:8px;display:flex;gap:8px;">',
-    '<button type="button" id="ai_school_parse" class="btn btn-primary">変換</button>',
-    '<button type="button" id="ai_school_apply" class="btn btn-default" disabled>フォームへ反映</button>',
-    '</div>',
-    '<pre id="ai_school_preview" style="margin-top:8px;display:none;white-space:pre-wrap;"></pre>',
-    '</div>'
-  ].join('');
-
-  root.parentNode.insertBefore(panel, root);
-
-  var parsedResult = null;
-  var parseButton = panel.querySelector('#ai_school_parse');
-  var applyButton = panel.querySelector('#ai_school_apply');
-  var preview = panel.querySelector('#ai_school_preview');
-  var source = panel.querySelector('#ai_school_source_text');
-
-  parseButton.addEventListener('click', function () {
-    var text = source.value || '';
-    if (!text.trim()) {
-      g_form.addErrorMessage('学校からの連絡文を入力してください。');
-      return;
-    }
-
-    parseButton.disabled = true;
-    parseButton.textContent = '変換中...';
-
-    fetch('/api/x_144721_family_ap/family_portal_ai_assist/parse-school-text', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ source_text: text })
-    })
-      .then(function (r) { return r.json(); })
-      .then(function (json) {
-        if (!json || !json.result) throw new Error((json && json.error) || '変換に失敗しました。');
-        parsedResult = json.result;
-        preview.style.display = 'block';
-        preview.textContent = JSON.stringify(parsedResult, null, 2);
-        applyButton.disabled = false;
-        g_form.addInfoMessage('AI変換が完了しました。「フォームへ反映」を押してください。');
-      })
-      .catch(function (e) {
-        g_form.addErrorMessage('AI変換エラー: ' + e.message);
-      })
-      .finally(function () {
-        parseButton.disabled = false;
-        parseButton.textContent = '変換';
-      });
-  });
-
-  applyButton.addEventListener('click', function () {
+  window.schoolRequestChatAssistApplyHandler = function (event) {
+    var parsedResult = event && event.detail ? event.detail : {};
     if (!parsedResult) return;
+
     g_form.setValue('request_title', parsedResult.request_title || '');
     g_form.setValue('request_type', parsedResult.request_type || 'other');
     g_form.setValue('due_date', parsedResult.due_date || '');
@@ -196,6 +141,8 @@ CatalogClientScript({
     g_form.setValue('requested_action', parsedResult.requested_action || '');
     g_form.setValue('notes', parsedResult.notes || '');
     g_form.addInfoMessage('AI変換結果をフォームへ反映しました。内容を確認してから申請してください。');
-  });
+  };
+
+  window.addEventListener(eventName, window.schoolRequestChatAssistApplyHandler);
 }`
 })

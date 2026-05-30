@@ -1,5 +1,6 @@
 import {
     CatalogItem,
+    CustomWithLabelVariable,
     DateVariable,
     MultiLineTextVariable,
     SelectBoxVariable,
@@ -21,6 +22,12 @@ export const schoolRequestCatalogItem = CatalogItem({
     hideDeliveryTime: true,
     meta: ['family', 'school', 'parent', 'request'],
     variables: {
+        ai_assist: CustomWithLabelVariable({
+            question: '学校連絡AIアシスト（β）',
+            order: 50,
+            width: 100,
+            widget: '1f24ac4a2f7d48f1a6616c6e4b0d0a8b',
+        }),
         request_title: SingleLineTextVariable({
             question: '依頼タイトル',
             mandatory: true,
