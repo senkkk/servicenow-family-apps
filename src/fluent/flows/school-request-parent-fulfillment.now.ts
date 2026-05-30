@@ -1,5 +1,5 @@
 import { action, Flow, trigger, wfa } from '@servicenow/sdk/automation'
-import { schoolRequestCatalogItem } from '../catalog/school-request.now'
+import { schoolRequestCatalogItem, schoolRequestConversationCatalogItem } from '../catalog/school-request.now'
 
 export const schoolRequestParentFulfillmentFlow = Flow(
     {
@@ -11,7 +11,7 @@ export const schoolRequestParentFulfillmentFlow = Flow(
     },
     wfa.trigger(trigger.record.created, { $id: Now.ID['school_request_catalog_trigger'] }, {
         table: 'sc_req_item',
-        condition: `cat_item=${schoolRequestCatalogItem}`,
+        condition: `cat_item=${schoolRequestCatalogItem}^ORcat_item=${schoolRequestConversationCatalogItem}`,
         run_flow_in: 'background',
     }),
     (_params) => {
