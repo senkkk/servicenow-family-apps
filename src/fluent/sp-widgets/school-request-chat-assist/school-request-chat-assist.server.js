@@ -12,9 +12,10 @@
         return
     }
 
-    var endpoint = gs.getProperty('x_144721_family_ap.azure_openai_endpoint', '')
+    var endpoint = (gs.getProperty('x_144721_family_ap.azure_openai_endpoint', '') || '').replace(/\/+$/, '')
     var apiKey = gs.getProperty('x_144721_family_ap.azure_openai_api_key', '')
     var deployment = gs.getProperty('x_144721_family_ap.azure_openai_deployment', 'gpt-4o-mini')
+    var apiVersion = (gs.getProperty('x_144721_family_ap.azure_openai_api_version', '2024-08-01-preview') || '2024-08-01-preview').trim()
 
     if (!endpoint || !apiKey) {
         data.error = 'Azure OpenAI の設定が不足しています。'
@@ -22,7 +23,6 @@
     }
 
     try {
-        var url = endpoint + '/openai/deployments/' + deployment + '/chat/completions?api-version=2024-10-21'
         var instruction = 'あなたは学校連絡文をServiceNow申請項目へ変換するアシスタントです。JSONのみを返答してください。'
         var schema =
             '{"request_title":"string","request_type":"purchase|sign_or_submit|payment|other","due_date":"YYYY-MM-DD or empty","source_summary":"string","requested_action":"string","notes":"string"}'
@@ -35,6 +35,8 @@
             temperature: 0.2,
             response_format: { type: 'json_object' },
         }
+
+        var url = endpoint + '/openai/deployments/' + encodeURIComponent(deployment) + '/chat/completions?api-version=' + encodeURIComponent(apiVersion)
 
         var rm = new sn_ws.RESTMessageV2()
         rm.setHttpMethod('POST')
@@ -49,7 +51,14 @@
 
         if (status < 200 || status >= 300) {
             data.error = 'Azure OpenAI 呼び出しに失敗しました。'
-            gs.error('School Request Chat Assist Azure OpenAI error: status=' + status + ', body=' + text)
+            gs.error(
+                'School Request Chat Assist Azure OpenAI error: status=' +
+                    status +
+                    ', api_version=' +
+                    apiVersion +
+                    ', body=' +
+                    text
+            )
             return
         }
 

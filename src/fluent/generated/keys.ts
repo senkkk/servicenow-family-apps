@@ -9,6 +9,10 @@ declare global {
                         table: 'sys_properties'
                         id: '879642a2e005452ca2d665c7d66258ad'
                     }
+                    azure_openai_api_version_property: {
+                        table: 'sys_properties'
+                        id: '251213d98b6644108b0956975dbccb0c'
+                    }
                     azure_openai_deployment_property: {
                         table: 'sys_properties'
                         id: '1b018ee377324834b41a8ff79ae6ceb8'
