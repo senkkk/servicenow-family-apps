@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-SN_SDK_VERSION="${SN_SDK_VERSION:-latest}"
+SN_SDK_VERSION="${SN_SDK_VERSION:-4.7.0}"
 SN_REINSTALL="${SN_REINSTALL:-false}"
 SN_OPEN_BROWSER="${SN_OPEN_BROWSER:-false}"
 

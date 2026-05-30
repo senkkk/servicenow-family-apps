@@ -4,9 +4,8 @@ import { schoolRequestCatalogItem, schoolRequestConversationCatalogItem } from '
 const azureEndpointProperty = Property({
     $id: Now.ID['azure_openai_endpoint_property'],
     name: 'x_144721_family_ap.azure_openai_endpoint',
-    $meta: { installMethod: 'first install' },
+    $meta: { installMethod: 'once' },
     type: 'string',
-    value: '',
     description: 'Azure OpenAI エンドポイント URL（例: https://<resource>.openai.azure.com）',
     roles: { read: ['admin'], write: ['admin'] },
 })
@@ -14,9 +13,8 @@ const azureEndpointProperty = Property({
 const azureApiKeyProperty = Property({
     $id: Now.ID['azure_openai_api_key_property'],
     name: 'x_144721_family_ap.azure_openai_api_key',
-    $meta: { installMethod: 'first install' },
+    $meta: { installMethod: 'once' },
     type: 'password2',
-    value: '',
     description: 'Azure OpenAI API Key',
     roles: { read: ['admin'], write: ['admin'] },
 })
@@ -24,9 +22,8 @@ const azureApiKeyProperty = Property({
 Property({
     $id: Now.ID['azure_openai_deployment_property'],
     name: 'x_144721_family_ap.azure_openai_deployment',
-    $meta: { installMethod: 'first install' },
+    $meta: { installMethod: 'once' },
     type: 'string',
-    value: 'gpt-4o-mini',
     description: 'Azure OpenAI のデプロイメント名（仮置き）',
     roles: { read: ['admin'], write: ['admin'] },
 })
