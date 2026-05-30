@@ -6,7 +6,6 @@ const azureEndpointProperty = Property({
     name: 'x_144721_family_ap.azure_openai_endpoint',
     $meta: { installMethod: 'first install' },
     type: 'string',
-    value: '',
     description: 'Azure OpenAI エンドポイント URL（例: https://<resource>.openai.azure.com）',
     roles: { read: ['admin'], write: ['admin'] },
 })
@@ -16,7 +15,6 @@ const azureApiKeyProperty = Property({
     name: 'x_144721_family_ap.azure_openai_api_key',
     $meta: { installMethod: 'first install' },
     type: 'password2',
-    value: '',
     description: 'Azure OpenAI API Key',
     roles: { read: ['admin'], write: ['admin'] },
 })
@@ -26,7 +24,6 @@ Property({
     name: 'x_144721_family_ap.azure_openai_deployment',
     $meta: { installMethod: 'first install' },
     type: 'string',
-    value: 'gpt-4o-mini',
     description: 'Azure OpenAI のデプロイメント名（仮置き）',
     roles: { read: ['admin'], write: ['admin'] },
 })
