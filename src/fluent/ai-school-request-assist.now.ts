@@ -21,6 +21,16 @@ const azureApiKeyProperty = Property({
     roles: { read: ['admin'], write: ['admin'] },
 })
 
+const azureApiVersionProperty = Property({
+    $id: Now.ID['azure_openai_api_version_property'],
+    $meta: { installMethod: 'first install' },
+    name: 'x_144721_family_ap.azure_openai_api_version',
+    type: 'string',
+    value: '2024-08-01-preview',
+    description: 'Azure OpenAI Chat Completions API バージョン。利用中の Azure リージョンで未対応の場合は変更してください。',
+    roles: { read: ['admin'], write: ['admin'] },
+})
+
 Property({
     $id: Now.ID['azure_openai_deployment_property'],
     name: 'x_144721_family_ap.azure_openai_deployment',
@@ -56,9 +66,10 @@ RestApi({
         return;
     }
 
-    var endpoint = gs.getProperty('${azureEndpointProperty.name}', '');
+    var endpoint = (gs.getProperty('${azureEndpointProperty.name}', '') || '').replace(/\/+$/, '');
     var apiKey = gs.getProperty('${azureApiKeyProperty.name}', '');
     var deployment = gs.getProperty('x_144721_family_ap.azure_openai_deployment', 'gpt-4o-mini');
+    var apiVersion = (gs.getProperty('${azureApiVersionProperty.name}', '2024-08-01-preview') || '2024-08-01-preview').trim();
 
     if (!endpoint || !apiKey) {
         response.setStatus(500);
@@ -66,7 +77,7 @@ RestApi({
         return;
     }
 
-    var url = endpoint + '/openai/deployments/' + deployment + '/chat/completions?api-version=2024-10-21';
+    var url = endpoint + '/openai/deployments/' + encodeURIComponent(deployment) + '/chat/completions?api-version=' + encodeURIComponent(apiVersion);
 
     var instruction = 'あなたは学校連絡文をServiceNow申請項目へ変換するアシスタントです。JSONのみを返答してください。';
     var schema = '{"request_title":"string","request_type":"purchase|sign_or_submit|payment|other","due_date":"YYYY-MM-DD or empty","source_summary":"string","requested_action":"string","notes":"string"}';
@@ -93,7 +104,7 @@ RestApi({
 
     if (status < 200 || status >= 300) {
         response.setStatus(502);
-        response.setBody({ error: 'Azure OpenAI 呼び出しに失敗しました。', detail: text });
+        response.setBody({ error: 'Azure OpenAI 呼び出しに失敗しました。', api_version: apiVersion, detail: text });
         return;
     }
 
