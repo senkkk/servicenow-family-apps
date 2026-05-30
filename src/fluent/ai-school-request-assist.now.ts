@@ -125,12 +125,18 @@ CatalogClientScript({
     catalogItem: schoolRequestCatalogItem,
     script: `function onLoad() {
   var eventName = 'school-request-ai-assist.apply';
+  var globalObject = typeof globalThis !== 'undefined' ? globalThis : null;
 
-  if (window.schoolRequestChatAssistApplyHandler) {
-    window.removeEventListener(eventName, window.schoolRequestChatAssistApplyHandler);
+  if (!globalObject || !globalObject.addEventListener || !globalObject.removeEventListener) {
+    g_form.addErrorMessage('AIアシストの初期化に失敗しました。ブラウザのイベントAPIを参照できません。');
+    return;
   }
 
-  window.schoolRequestChatAssistApplyHandler = function (event) {
+  if (globalObject.schoolRequestChatAssistApplyHandler) {
+    globalObject.removeEventListener(eventName, globalObject.schoolRequestChatAssistApplyHandler);
+  }
+
+  globalObject.schoolRequestChatAssistApplyHandler = function (event) {
     var parsedResult = event && event.detail ? event.detail : {};
     if (!parsedResult) return;
 
@@ -143,6 +149,6 @@ CatalogClientScript({
     g_form.addInfoMessage('AI変換結果をフォームへ反映しました。内容を確認してから申請してください。');
   };
 
-  window.addEventListener(eventName, window.schoolRequestChatAssistApplyHandler);
+  globalObject.addEventListener(eventName, globalObject.schoolRequestChatAssistApplyHandler);
 }`
 })
