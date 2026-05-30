@@ -66,8 +66,7 @@
             '会話履歴:',
         ]
 
-        var start = Math.max(0, chatMessages.length - 12)
-        for (var i = start; i < chatMessages.length; i++) {
+        for (var i = 0; i < chatMessages.length; i++) {
             var message = chatMessages[i] || {}
             var roleLabel = message.role === 'assistant' ? 'AI' : 'ユーザー'
             var text = (message.content || '').toString()
