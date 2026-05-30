@@ -5,6 +5,18 @@ declare global {
         namespace Internal {
             interface Keys extends KeysRegistry {
                 explicit: {
+                    azure_openai_api_key_property: {
+                        table: 'sys_properties'
+                        id: '879642a2e005452ca2d665c7d66258ad'
+                    }
+                    azure_openai_deployment_property: {
+                        table: 'sys_properties'
+                        id: '1b018ee377324834b41a8ff79ae6ceb8'
+                    }
+                    azure_openai_endpoint_property: {
+                        table: 'sys_properties'
+                        id: 'f403ef0ec7b045478b19b37101f30df2'
+                    }
                     bom_json: {
                         table: 'sys_module'
                         id: '05881790e991468b897a59c0d24860c5'
@@ -81,6 +93,14 @@ declare global {
                         table: 'sp_portal'
                         id: '588c32b53ab34154808b5cf37c455855'
                     }
+                    family_portal_ai_assist_api: {
+                        table: 'sys_ws_definition'
+                        id: 'a2c7139c54974dd4979cbe20ec4b32c7'
+                    }
+                    family_portal_ai_assist_parse_route: {
+                        table: 'sys_ws_operation'
+                        id: 'a1e00c9ed7864f49a97e411c0081f823'
+                    }
                     family_portal_main_menu: {
                         table: 'sp_instance_menu'
                         id: '9027989274614efd95f2c1120036b61f'
@@ -124,6 +144,10 @@ declare global {
                     school_request_catalog_trigger: {
                         table: 'sys_hub_trigger_instance_v2'
                         id: '66b7510fb5924851b17575fbebcbd9a6'
+                    }
+                    school_request_chat_assist_catalog_client_script: {
+                        table: 'catalog_script_client'
+                        id: '48266a374a50404491c584a9f8e2d241'
                     }
                     school_request_parent_fulfillment_flow: {
                         table: 'sys_hub_flow'
