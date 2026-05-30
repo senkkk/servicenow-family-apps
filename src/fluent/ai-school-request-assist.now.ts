@@ -21,16 +21,6 @@ const azureApiKeyProperty = Property({
     roles: { read: ['admin'], write: ['admin'] },
 })
 
-const azureApiVersionProperty = Property({
-    $id: Now.ID['azure_openai_api_version_property'],
-    $meta: { installMethod: 'first install' },
-    name: 'x_144721_family_ap.azure_openai_api_version',
-    type: 'string',
-    value: '2024-08-01-preview',
-    description: 'Azure OpenAI Chat Completions API バージョン。利用中の Azure リージョンで未対応の場合は変更してください。',
-    roles: { read: ['admin'], write: ['admin'] },
-})
-
 Property({
     $id: Now.ID['azure_openai_deployment_property'],
     name: 'x_144721_family_ap.azure_openai_deployment',
@@ -69,27 +59,92 @@ RestApi({
     var endpoint = (gs.getProperty('${azureEndpointProperty.name}', '') || '').replace(/\/+$/, '');
     var apiKey = gs.getProperty('${azureApiKeyProperty.name}', '');
     var deployment = gs.getProperty('x_144721_family_ap.azure_openai_deployment', 'gpt-4o-mini');
-    var apiVersion = (gs.getProperty('${azureApiVersionProperty.name}', '2024-08-01-preview') || '2024-08-01-preview').trim();
 
-    if (!endpoint || !apiKey) {
+    if (!endpoint || !apiKey || !deployment) {
         response.setStatus(500);
         response.setBody({ error: 'Azure OpenAI の設定が不足しています。' });
         return;
     }
 
-    var url = endpoint + '/openai/deployments/' + encodeURIComponent(deployment) + '/chat/completions?api-version=' + encodeURIComponent(apiVersion);
+    function getSchoolRequestSchema() {
+        return {
+            type: 'object',
+            additionalProperties: false,
+            required: ['request_title', 'request_type', 'due_date', 'source_summary', 'requested_action', 'notes'],
+            properties: {
+                request_title: { type: 'string' },
+                request_type: {
+                    type: 'string',
+                    enum: ['purchase', 'sign_or_submit', 'payment', 'other']
+                },
+                due_date: { type: 'string' },
+                source_summary: { type: 'string' },
+                requested_action: { type: 'string' },
+                notes: { type: 'string' }
+            }
+        };
+    }
 
-    var instruction = 'あなたは学校連絡文をServiceNow申請項目へ変換するアシスタントです。JSONのみを返答してください。';
-    var schema = '{"request_title":"string","request_type":"purchase|sign_or_submit|payment|other","due_date":"YYYY-MM-DD or empty","source_summary":"string","requested_action":"string","notes":"string"}';
+    function buildPrompt(text) {
+        return [
+            'あなたは学校連絡文をServiceNow申請項目へ変換するアシスタントです。',
+            '学校から受領した連絡文を読み取り、保護者が申請フォームへ転記しやすいように整理してください。',
+            '不明な項目は空文字にしてください。対応期限が明確な場合のみ YYYY-MM-DD 形式で返してください。',
+            'request_type は purchase, sign_or_submit, payment, other のいずれかを選んでください。',
+            'source_summary, requested_action, notes は簡潔な日本語で返してください。',
+            '',
+            '学校からの連絡文:',
+            text
+        ].join('\n');
+    }
+
+    function extractResponseText(parsed) {
+        if (parsed && parsed.output_text) {
+            return parsed.output_text;
+        }
+
+        var output = parsed && parsed.output ? parsed.output : [];
+        for (var i = 0; i < output.length; i++) {
+            var content = output[i] && output[i].content ? output[i].content : [];
+            for (var j = 0; j < content.length; j++) {
+                if (content[j] && content[j].text) {
+                    return content[j].text;
+                }
+                if (content[j] && content[j].output_text) {
+                    return content[j].output_text;
+                }
+            }
+        }
+
+        return '';
+    }
 
     var payload = {
-        messages: [
-            { role: 'system', content: instruction + ' 形式: ' + schema },
-            { role: 'user', content: sourceText }
+        model: deployment,
+        store: false,
+        input: [
+            {
+                role: 'user',
+                content: [
+                    {
+                        type: 'input_text',
+                        text: buildPrompt(sourceText)
+                    }
+                ]
+            }
         ],
-        temperature: 0.2,
-        response_format: { type: 'json_object' }
+        text: {
+            format: {
+                type: 'json_schema',
+                name: 'school_request_parse',
+                strict: true,
+                schema: getSchoolRequestSchema()
+            }
+        },
+        max_output_tokens: 600
     };
+
+    var url = endpoint + '/openai/v1/responses';
 
     var rm = new sn_ws.RESTMessageV2();
     rm.setHttpMethod('POST');
@@ -104,12 +159,18 @@ RestApi({
 
     if (status < 200 || status >= 300) {
         response.setStatus(502);
-        response.setBody({ error: 'Azure OpenAI 呼び出しに失敗しました。', api_version: apiVersion, detail: text });
+        response.setBody({ error: 'Azure OpenAI 呼び出しに失敗しました。', detail: text });
         return;
     }
 
     var outer = JSON.parse(text);
-    var content = outer && outer.choices && outer.choices[0] && outer.choices[0].message ? outer.choices[0].message.content : '{}';
+    var content = extractResponseText(outer);
+
+    if (!content) {
+        response.setStatus(502);
+        response.setBody({ error: 'AI応答からテキストを取得できませんでした。', detail: text });
+        return;
+    }
 
     var parsed = {};
     try {
@@ -123,6 +184,7 @@ RestApi({
     response.setStatus(200);
     response.setBody({ result: parsed });
 })(request, response)
+
             `,
         },
     ],

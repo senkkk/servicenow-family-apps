@@ -12,6 +12,7 @@ declare global {
                     azure_openai_api_version_property: {
                         table: 'sys_properties'
                         id: '251213d98b6644108b0956975dbccb0c'
+                        deleted: true
                     }
                     azure_openai_deployment_property: {
                         table: 'sys_properties'
