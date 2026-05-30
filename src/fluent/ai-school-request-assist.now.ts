@@ -1,5 +1,5 @@
 import { CatalogClientScript, Property, RestApi } from '@servicenow/sdk/core'
-import { schoolRequestCatalogItem } from './catalog/school-request.now'
+import { schoolRequestCatalogItem, schoolRequestConversationCatalogItem } from './catalog/school-request.now'
 
 const azureEndpointProperty = Property({
     $id: Now.ID['azure_openai_endpoint_property'],
@@ -226,5 +226,44 @@ CatalogClientScript({
   };
 
   globalObject.addEventListener(eventName, globalObject.schoolRequestChatAssistApplyHandler);
+}`
+})
+
+CatalogClientScript({
+    $id: Now.ID['school_request_conversation_assist_catalog_client_script'],
+    name: 'School Request Conversation Assist (Portal)',
+    type: 'onLoad',
+    uiType: 'mobileOrServicePortal',
+    global: false,
+    isolateScript: false,
+    active: true,
+    catalogItem: schoolRequestConversationCatalogItem,
+    script: `function onLoad() {
+  var eventName = 'school-request-conversation-assist.apply';
+  var globalObject = typeof globalThis !== 'undefined' ? globalThis : null;
+
+  if (!globalObject || !globalObject.addEventListener || !globalObject.removeEventListener) {
+    g_form.addErrorMessage('AIチャット相談の初期化に失敗しました。ブラウザのイベントAPIを参照できません。');
+    return;
+  }
+
+  if (globalObject.schoolRequestConversationAssistApplyHandler) {
+    globalObject.removeEventListener(eventName, globalObject.schoolRequestConversationAssistApplyHandler);
+  }
+
+  globalObject.schoolRequestConversationAssistApplyHandler = function (event) {
+    var draft = event && event.detail ? event.detail : {};
+    if (!draft) return;
+
+    g_form.setValue('request_title', draft.request_title || '');
+    g_form.setValue('request_type', draft.request_type || 'other');
+    g_form.setValue('due_date', draft.due_date || '');
+    g_form.setValue('source_summary', draft.source_summary || '');
+    g_form.setValue('requested_action', draft.requested_action || '');
+    g_form.setValue('notes', draft.notes || '');
+    g_form.addInfoMessage('AIチャットで整理した申請案をフォームへ反映しました。内容を確認してから申請してください。');
+  };
+
+  globalObject.addEventListener(eventName, globalObject.schoolRequestConversationAssistApplyHandler);
 }`
 })
