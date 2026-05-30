@@ -5,7 +5,7 @@ export const parentResponseGroupPropertyName = 'x_144721_family_ap.parent_respon
 export const parentResponseGroupProperty = Property({
     $id: Now.ID['parent_response_group_property'],
     name: parentResponseGroupPropertyName,
-    $meta: { installMethod: 'first install' },
+    $meta: { installMethod: 'once' },
     type: 'string',
     description: '学校からの依頼を受け取る父親・母親ユーザーを含む sys_user_group の sys_id です。',
     roles: {
