@@ -170,6 +170,18 @@ declare global {
                         table: 'sc_cat_item'
                         id: 'c811a8f00b20461ea46bcfb70ff4a295'
                     }
+                    school_request_file_assist_catalog_client_script: {
+                        table: 'catalog_script_client'
+                        id: 'c946d62499fb49fb9a826e8daeadda7b'
+                    }
+                    school_request_file_assist_widget: {
+                        table: 'sp_widget'
+                        id: '7c3cb847b0fe48e690ee071d279d4a52'
+                    }
+                    school_request_file_catalog_item: {
+                        table: 'sc_cat_item'
+                        id: '859d96b24a804111b63277e24ebee8ba'
+                    }
                     school_request_parent_fulfillment_flow: {
                         table: 'sys_hub_flow'
                         id: '66b7e034be624495948ec8d12f7c81f0'
@@ -200,6 +212,51 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: '0401696ee50049e8ba9967c4fe77e1a5'
+                        key: {
+                            question: {
+                                id: '140c386514de423cb36f1849055f807c'
+                                key: {
+                                    cat_item: '859d96b24a804111b63277e24ebee8ba'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'payment'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '06061f6f327a496289387a1fafe38086'
+                        key: {
+                            question: {
+                                id: '140c386514de423cb36f1849055f807c'
+                                key: {
+                                    cat_item: '859d96b24a804111b63277e24ebee8ba'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'sign_or_submit'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '07a1578cfc5e4cef9f547a7cc08e6f09'
+                        key: {
+                            question: {
+                                id: '140c386514de423cb36f1849055f807c'
+                                key: {
+                                    cat_item: '859d96b24a804111b63277e24ebee8ba'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'purchase'
+                        }
+                    },
+                    {
                         table: 'item_option_new'
                         id: '093ec34795f1463999ee6721945a7cea'
                         key: {
@@ -215,6 +272,23 @@ declare global {
                             cat_item: 'c811a8f00b20461ea46bcfb70ff4a295'
                             variable_set: 'NULL'
                             name: 'notes'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_catalog'
+                        id: '1181518801274f7590bb93f217c447df'
+                        key: {
+                            sc_cat_item: '859d96b24a804111b63277e24ebee8ba'
+                            sc_catalog: 'd8293035f1644bb8b454120fb8829aca'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '140c386514de423cb36f1849055f807c'
+                        key: {
+                            cat_item: '859d96b24a804111b63277e24ebee8ba'
+                            variable_set: 'NULL'
+                            name: 'request_type'
                         }
                     },
                     {
@@ -282,6 +356,21 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: '5786d33c5ed942d8bf9ffc262eeee279'
+                        key: {
+                            question: {
+                                id: '140c386514de423cb36f1849055f807c'
+                                key: {
+                                    cat_item: '859d96b24a804111b63277e24ebee8ba'
+                                    variable_set: 'NULL'
+                                    name: 'request_type'
+                                }
+                            }
+                            value: 'other'
+                        }
+                    },
+                    {
                         table: 'item_option_new'
                         id: '689250d6f9394ca8be2c77e5daa930d6'
                         key: {
@@ -307,11 +396,29 @@ declare global {
                     },
                     {
                         table: 'item_option_new'
+                        id: '7257935f7b3b4f2dab76a30bbbf62fc1'
+                        key: {
+                            cat_item: '859d96b24a804111b63277e24ebee8ba'
+                            variable_set: 'NULL'
+                            name: 'requested_action'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
                         id: '78980af99eb44b07b767b71502925730'
                         key: {
                             cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
                             variable_set: 'NULL'
                             name: 'due_date'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '84028a2e8fbc409684a604104f283756'
+                        key: {
+                            cat_item: '859d96b24a804111b63277e24ebee8ba'
+                            variable_set: 'NULL'
+                            name: 'notes'
                         }
                     },
                     {
@@ -322,6 +429,15 @@ declare global {
                             cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
                             variable_set: 'NULL'
                             name: 'child_name'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '8e606a0fc1694e8ebb302306508b8f9a'
+                        key: {
+                            cat_item: '859d96b24a804111b63277e24ebee8ba'
+                            variable_set: 'NULL'
+                            name: 'source_summary'
                         }
                     },
                     {
@@ -378,6 +494,23 @@ declare global {
                             cat_item: 'c811a8f00b20461ea46bcfb70ff4a295'
                             variable_set: 'NULL'
                             name: 'request_type'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_category'
+                        id: 'b66faaabbb644e9dbb43062a004c188f'
+                        key: {
+                            sc_cat_item: '859d96b24a804111b63277e24ebee8ba'
+                            sc_category: 'cf91d54e77004536a7335ca9cda42128'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'b933509766574d5c820ed9613cab2dc7'
+                        key: {
+                            cat_item: '859d96b24a804111b63277e24ebee8ba'
+                            variable_set: 'NULL'
+                            name: 'request_title'
                         }
                     },
                     {
@@ -456,11 +589,29 @@ declare global {
                     },
                     {
                         table: 'item_option_new'
+                        id: 'e65558bf6b3b4aa38fea548f08342714'
+                        key: {
+                            cat_item: '859d96b24a804111b63277e24ebee8ba'
+                            variable_set: 'NULL'
+                            name: 'due_date'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
                         id: 'e7440e6fc1544c089921392068b06938'
                         key: {
                             cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
                             variable_set: 'NULL'
                             name: 'ai_assist'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'e7fda2e4d6a747938e1e4f1014094b07'
+                        key: {
+                            cat_item: '859d96b24a804111b63277e24ebee8ba'
+                            variable_set: 'NULL'
+                            name: 'ai_file_assist'
                         }
                     },
                     {
@@ -480,6 +631,15 @@ declare global {
                             cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
                             variable_set: 'NULL'
                             name: 'school_name'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'f84fc70c0bc4430ea83059e0ad611d02'
+                        key: {
+                            cat_item: '859d96b24a804111b63277e24ebee8ba'
+                            variable_set: 'NULL'
+                            name: 'school_document'
                         }
                     },
                     {

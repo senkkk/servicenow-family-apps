@@ -1,4 +1,5 @@
 import {
+    AttachmentVariable,
     CatalogItem,
     CustomWithLabelVariable,
     DateVariable,
@@ -105,6 +106,89 @@ export const schoolRequestConversationCatalogItem = CatalogItem({
             order: 50,
             width: 100,
             widget: 'e2bcfa669c6342e7b8f54841aff8bdd3',
+        }),
+        request_title: SingleLineTextVariable({
+            question: '依頼タイトル',
+            mandatory: true,
+            order: 100,
+            exampleText: '習字セットを買って名前を書いてほしい',
+            width: 100,
+        }),
+        request_type: SelectBoxVariable({
+            question: '依頼の種類',
+            mandatory: true,
+            order: 200,
+            choices: {
+                purchase: {
+                    label: '購入・準備',
+                    sequence: 100,
+                },
+                sign_or_submit: {
+                    label: '署名・提出',
+                    sequence: 200,
+                },
+                payment: {
+                    label: '支払い',
+                    sequence: 300,
+                },
+                other: {
+                    label: 'その他',
+                    sequence: 400,
+                },
+            },
+        }),
+        due_date: DateVariable({
+            question: '対応期限',
+            mandatory: true,
+            order: 300,
+            width: 50,
+        }),
+        source_summary: MultiLineTextVariable({
+            question: '学校からの連絡内容',
+            mandatory: true,
+            order: 400,
+            width: 100,
+        }),
+        requested_action: MultiLineTextVariable({
+            question: '親に対応してほしいこと',
+            mandatory: true,
+            order: 500,
+            width: 100,
+        }),
+        notes: MultiLineTextVariable({
+            question: '補足',
+            order: 600,
+            width: 100,
+        }),
+    },
+})
+
+export const schoolRequestFileCatalogItem = CatalogItem({
+    $id: Now.ID['school_request_file_catalog_item'],
+    name: '学校からの依頼をPDF・写真からAI解析して親に相談する',
+    shortDescription: '学校から届いたPDFや撮影写真をAIで読み取り、親への依頼内容を整理します。',
+    description:
+        '学校の配布物PDFやその場で撮影した写真から、購入・準備・署名・提出・支払いなど親に依頼する内容をAIで抽出し、申請フォームへ反映します。',
+    catalogs: [familyCatalog],
+    categories: [schoolRequestsCategory],
+    requestMethod: 'submit',
+    availability: 'both',
+    hideAddToCart: true,
+    hideQuantitySelector: true,
+    hideDeliveryTime: true,
+    meta: ['family', 'school', 'parent', 'request', 'ai-file', 'pdf', 'photo'],
+    variables: {
+        ai_file_assist: CustomWithLabelVariable({
+            question: '学校配布物AIファイル解析（β）',
+            order: 50,
+            width: 100,
+            widget: '7c3cb847b0fe48e690ee071d279d4a52',
+        }),
+        school_document: AttachmentVariable({
+            question: '学校配布物・写真の原本',
+            order: 75,
+            width: 100,
+            helpText: 'AI解析に使ったPDFまたは写真を、申請の原本として添付してください。',
         }),
         request_title: SingleLineTextVariable({
             question: '依頼タイトル',
