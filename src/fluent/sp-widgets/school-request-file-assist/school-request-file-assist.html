@@ -1,0 +1,65 @@
+<div class="school-request-file-assist panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">学校配布物AIファイル解析（β）</h3>
+  </div>
+  <div class="panel-body">
+    <p class="text-muted">
+      学校から配布されたPDF、またはその場で撮影した写真を選択して「ファイルを解析」を押してください。AIが依頼内容を整理し、申請項目へ転記できる形にします。
+    </p>
+
+    <div class="alert alert-info">
+      解析後は必ず内容を確認してください。原本を残したい場合は、下の「学校配布物・写真の原本」欄にも同じファイルを添付してください。
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': c.errorMessage}">
+      <label for="ai_school_request_file">解析するファイル</label>
+      <input
+        id="ai_school_request_file"
+        type="file"
+        class="form-control"
+        accept="application/pdf,image/*"
+        capture="environment"
+        onchange="angular.element(this).scope().c.onFileChange(this.files); angular.element(this).scope().$apply();"
+        ng-disabled="c.loading" />
+      <p class="help-block" ng-if="c.selectedFileName">
+        選択中: <strong ng-bind="c.selectedFileName"></strong>
+        <span ng-if="c.selectedFileSizeLabel">（{{c.selectedFileSizeLabel}}）</span>
+      </p>
+      <p class="help-block" ng-if="c.errorMessage" ng-bind="c.errorMessage"></p>
+    </div>
+
+    <div class="school-request-file-assist-actions">
+      <button type="button" class="btn btn-primary" ng-click="c.analyze()" ng-disabled="c.loading || !c.selectedFile">
+        <span ng-if="!c.loading">ファイルを解析</span>
+        <span ng-if="c.loading">解析中...</span>
+      </button>
+      <button type="button" class="btn btn-default" ng-click="c.apply()" ng-disabled="!c.parsedResult || c.loading">
+        フォームへ反映
+      </button>
+    </div>
+
+    <div class="alert alert-success" ng-if="c.infoMessage" ng-bind="c.infoMessage"></div>
+
+    <div class="school-request-file-assist-summary" ng-if="c.parsedResult">
+      <h4>解析結果プレビュー</h4>
+      <dl class="dl-horizontal">
+        <dt>依頼タイトル</dt>
+        <dd ng-bind="c.parsedResult.request_title || '未整理'"></dd>
+        <dt>依頼の種類</dt>
+        <dd ng-bind="c.getRequestTypeLabel(c.parsedResult.request_type)"></dd>
+        <dt>対応期限</dt>
+        <dd ng-bind="c.parsedResult.due_date || '未整理'"></dd>
+        <dt>学校からの連絡内容</dt>
+        <dd ng-bind="c.parsedResult.source_summary || '未整理'"></dd>
+        <dt>親に対応してほしいこと</dt>
+        <dd ng-bind="c.parsedResult.requested_action || '未整理'"></dd>
+        <dt>補足</dt>
+        <dd ng-bind="c.parsedResult.notes || 'なし'"></dd>
+      </dl>
+      <details>
+        <summary>JSONプレビュー</summary>
+        <pre ng-bind="c.previewJson"></pre>
+      </details>
+    </div>
+  </div>
+</div>

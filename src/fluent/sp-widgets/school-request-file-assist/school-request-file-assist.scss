@@ -1,0 +1,37 @@
+.school-request-file-assist {
+    border-color: #d9ead7;
+    margin-bottom: 16px;
+}
+
+.school-request-file-assist .panel-heading {
+    background: #f1fbef;
+    border-color: #d9ead7;
+}
+
+.school-request-file-assist .panel-title {
+    font-weight: 600;
+}
+
+.school-request-file-assist-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.school-request-file-assist-summary {
+    background: #fbfff9;
+    border: 1px solid #d9ead7;
+    border-radius: 6px;
+    margin-top: 16px;
+    padding: 12px 16px;
+}
+
+.school-request-file-assist-summary h4 {
+    margin-top: 0;
+}
+
+.school-request-file-assist-summary pre {
+    margin-top: 8px;
+    white-space: pre-wrap;
+}

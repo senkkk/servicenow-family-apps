@@ -1,5 +1,9 @@
 import { CatalogClientScript, Property, RestApi } from '@servicenow/sdk/core'
-import { schoolRequestCatalogItem, schoolRequestConversationCatalogItem } from './catalog/school-request.now'
+import {
+    schoolRequestCatalogItem,
+    schoolRequestConversationCatalogItem,
+    schoolRequestFileCatalogItem,
+} from './catalog/school-request.now'
 
 const azureEndpointProperty = Property({
     $id: Now.ID['azure_openai_endpoint_property'],
@@ -262,5 +266,44 @@ CatalogClientScript({
   };
 
   globalObject.addEventListener(eventName, globalObject.schoolRequestConversationAssistApplyHandler);
+}`
+})
+
+CatalogClientScript({
+    $id: Now.ID['school_request_file_assist_catalog_client_script'],
+    name: 'School Request File Assist (Portal)',
+    type: 'onLoad',
+    uiType: 'mobileOrServicePortal',
+    global: false,
+    isolateScript: false,
+    active: true,
+    catalogItem: schoolRequestFileCatalogItem,
+    script: `function onLoad() {
+  var eventName = 'school-request-file-assist.apply';
+  var globalObject = typeof globalThis !== 'undefined' ? globalThis : null;
+
+  if (!globalObject || !globalObject.addEventListener || !globalObject.removeEventListener) {
+    g_form.addErrorMessage('AIファイル解析の初期化に失敗しました。ブラウザのイベントAPIを参照できません。');
+    return;
+  }
+
+  if (globalObject.schoolRequestFileAssistApplyHandler) {
+    globalObject.removeEventListener(eventName, globalObject.schoolRequestFileAssistApplyHandler);
+  }
+
+  globalObject.schoolRequestFileAssistApplyHandler = function (event) {
+    var parsedResult = event && event.detail ? event.detail : {};
+    if (!parsedResult) return;
+
+    g_form.setValue('request_title', parsedResult.request_title || '');
+    g_form.setValue('request_type', parsedResult.request_type || 'other');
+    g_form.setValue('due_date', parsedResult.due_date || '');
+    g_form.setValue('source_summary', parsedResult.source_summary || '');
+    g_form.setValue('requested_action', parsedResult.requested_action || '');
+    g_form.setValue('notes', parsedResult.notes || '');
+    g_form.addInfoMessage('AIファイル解析結果をフォームへ反映しました。内容を確認し、原本ファイルも添付してから申請してください。');
+  };
+
+  globalObject.addEventListener(eventName, globalObject.schoolRequestFileAssistApplyHandler);
 }`
 })
