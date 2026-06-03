@@ -11,7 +11,7 @@ const OOTB = {
         headerMenu: '5ef595c1cb12020000f8d856634c9c6e',
         homepageSearch: '200fbd96cb20020000f8d856634c9ca1',
         myRequests: 'f1672671d7301200a9addd173e24d47d',
-        userProfile: '6e6ac664d710120023c84f80de610318',
+        recentAndPopularItems: 'sc-recent-popular',
     },
     page: {
         approvals: 'd3485112cb13310000f8d856634c9c3e',
@@ -138,18 +138,18 @@ export const familyPortalHomePage = SPPage({
                             ],
                         },
                         {
-                            $id: 'family_home_profile_column',
+                            $id: 'family_home_recent_popular_column',
                             size: 4,
                             sizeSm: 12,
                             sizeXs: 12,
                             order: 300,
                             instances: [
                                 {
-                                    $id: 'family_home_profile_instance',
-                                    id: 'family-home-profile',
-                                    title: 'プロフィール',
-                                    widget: OOTB.widget.userProfile,
-                                    glyph: 'user',
+                                    $id: 'family_home_recent_popular_instance',
+                                    id: 'family-home-recent-popular',
+                                    title: '最近・人気のアイテム',
+                                    widget: OOTB.widget.recentAndPopularItems,
+                                    glyph: 'clock-o',
                                     order: 100,
                                 },
                             ],
