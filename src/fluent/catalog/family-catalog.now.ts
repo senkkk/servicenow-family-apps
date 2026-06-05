@@ -20,3 +20,14 @@ export const schoolRequestsCategory = Record({
         active: true,
     },
 })
+
+export const lifeImprovementRequestsCategory = Record({
+    $id: Now.ID['life_improvement_requests_category'],
+    table: 'sc_category',
+    data: {
+        title: '暮らし改善アイディア',
+        description: '掃除頻度やお小遣いなど、家族の生活をよくする提案を話し合うための申請をまとめます。',
+        sc_catalog: familyCatalog,
+        active: true,
+    },
+})
