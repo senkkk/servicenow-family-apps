@@ -65,10 +65,20 @@ declare global {
                     family_home_profile_column: {
                         table: 'sp_column'
                         id: '6f5e89e9425a4e6aa6d4db739d96dbec'
+                        deleted: true
                     }
                     family_home_profile_instance: {
                         table: 'sp_instance'
                         id: '17ef0ca14cda41c5ae12fd5cfbfa0b19'
+                        deleted: true
+                    }
+                    family_home_recent_popular_column: {
+                        table: 'sp_column'
+                        id: '9dc418698e90465ea0823218c105ce43'
+                    }
+                    family_home_recent_popular_instance: {
+                        table: 'sp_instance'
+                        id: '7abf0e81497b42b4aa56797dd86b181b'
                     }
                     family_home_requests_column: {
                         table: 'sp_column'
@@ -129,6 +139,14 @@ declare global {
                     family_portal_menu_my_requests: {
                         table: 'sp_rectangle_menu_item'
                         id: 'd0f3d422536b4b7493f0d6a428cce22f'
+                    }
+                    life_improvement_request_catalog_item: {
+                        table: 'sc_cat_item'
+                        id: 'ed9d3f0c1deb4b76bffecc2118963388'
+                    }
+                    life_improvement_requests_category: {
+                        table: 'sc_category'
+                        id: '8a2407dafa8140c6924af95efdb2492d'
                     }
                     lookup_parent_response_group_property: {
                         table: 'sys_hub_action_instance_v2'
@@ -224,6 +242,21 @@ declare global {
                                 }
                             }
                             value: 'payment'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '05ccdf77fa524fe593440500d6666856'
+                        key: {
+                            question: {
+                                id: 'ac42b52b868a4aeaa5a30c8f34decbff'
+                                key: {
+                                    cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                                    variable_set: 'NULL'
+                                    name: 'improvement_area'
+                                }
+                            }
+                            value: 'allowance'
                         }
                     },
                     {
@@ -331,12 +364,45 @@ declare global {
                         }
                     },
                     {
+                        table: 'question_choice'
+                        id: '2ec537666e834b209d829215e6b772a7'
+                        key: {
+                            question: {
+                                id: 'ac42b52b868a4aeaa5a30c8f34decbff'
+                                key: {
+                                    cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                                    variable_set: 'NULL'
+                                    name: 'improvement_area'
+                                }
+                            }
+                            value: 'cleaning'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '301d1132b3164b758a2b5a1205256c76'
+                        key: {
+                            cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                            variable_set: 'NULL'
+                            name: 'expected_benefit'
+                        }
+                    },
+                    {
                         table: 'item_option_new'
                         id: '3098c1aef7a746fdb31db88cbdeb6077'
                         key: {
                             cat_item: 'c811a8f00b20461ea46bcfb70ff4a295'
                             variable_set: 'NULL'
                             name: 'requested_action'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '343ea98d596a459ba0b99a988d394ec0'
+                        key: {
+                            cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                            variable_set: 'NULL'
+                            name: 'proposal_title'
                         }
                     },
                     {
@@ -356,6 +422,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: '48d20ec460d74ba798a1b1b369ea2435'
+                        key: {
+                            cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                            variable_set: 'NULL'
+                            name: 'discussion_deadline'
+                        }
+                    },
+                    {
                         table: 'question_choice'
                         id: '5786d33c5ed942d8bf9ffc262eeee279'
                         key: {
@@ -368,6 +443,46 @@ declare global {
                                 }
                             }
                             value: 'other'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_category'
+                        id: '5896632dc63a49fc84295191690a9600'
+                        key: {
+                            sc_cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                            sc_category: '8a2407dafa8140c6924af95efdb2492d'
+                        }
+                    },
+                    {
+                        table: 'sc_cat_item_catalog'
+                        id: '5c0bdc13a0d241bf93f1dd2e677eab6d'
+                        key: {
+                            sc_cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                            sc_catalog: 'd8293035f1644bb8b454120fb8829aca'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '611da6aa141742818cd26e150fd7c382'
+                        key: {
+                            question: {
+                                id: 'ac42b52b868a4aeaa5a30c8f34decbff'
+                                key: {
+                                    cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                                    variable_set: 'NULL'
+                                    name: 'improvement_area'
+                                }
+                            }
+                            value: 'rule'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: '630fddfd57854cbcbac27cd1c9e1033f'
+                        key: {
+                            cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                            variable_set: 'NULL'
+                            name: 'proposed_change'
                         }
                     },
                     {
@@ -414,6 +529,15 @@ declare global {
                     },
                     {
                         table: 'item_option_new'
+                        id: '7b96a95267754efc94e559ec8691b918'
+                        key: {
+                            cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                            variable_set: 'NULL'
+                            name: 'current_issue'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
                         id: '84028a2e8fbc409684a604104f283756'
                         key: {
                             cat_item: '859d96b24a804111b63277e24ebee8ba'
@@ -429,6 +553,36 @@ declare global {
                             cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
                             variable_set: 'NULL'
                             name: 'child_name'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '85422de240884a71ac693068e8944bd3'
+                        key: {
+                            question: {
+                                id: 'ac42b52b868a4aeaa5a30c8f34decbff'
+                                key: {
+                                    cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                                    variable_set: 'NULL'
+                                    name: 'improvement_area'
+                                }
+                            }
+                            value: 'other'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: '8d1248d1efa64d148f52529f7542c5ca'
+                        key: {
+                            question: {
+                                id: 'ac42b52b868a4aeaa5a30c8f34decbff'
+                                key: {
+                                    cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                                    variable_set: 'NULL'
+                                    name: 'improvement_area'
+                                }
+                            }
+                            value: 'chores'
                         }
                     },
                     {
@@ -473,6 +627,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: 'ac42b52b868a4aeaa5a30c8f34decbff'
+                        key: {
+                            cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                            variable_set: 'NULL'
+                            name: 'improvement_area'
+                        }
+                    },
+                    {
                         table: 'question_choice'
                         id: 'acf60d57c61a4701a88235de9c8357a7'
                         key: {
@@ -485,6 +648,15 @@ declare global {
                                 }
                             }
                             value: 'other'
+                        }
+                    },
+                    {
+                        table: 'item_option_new'
+                        id: 'b127fd3b1f5e40fbac966e9891bdb7f8'
+                        key: {
+                            cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                            variable_set: 'NULL'
+                            name: 'notes'
                         }
                     },
                     {
@@ -511,6 +683,21 @@ declare global {
                             cat_item: '859d96b24a804111b63277e24ebee8ba'
                             variable_set: 'NULL'
                             name: 'request_title'
+                        }
+                    },
+                    {
+                        table: 'question_choice'
+                        id: 'c47225f7ffcf43f0af5b2a88534548a3'
+                        key: {
+                            question: {
+                                id: 'ac42b52b868a4aeaa5a30c8f34decbff'
+                                key: {
+                                    cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
+                                    variable_set: 'NULL'
+                                    name: 'improvement_area'
+                                }
+                            }
+                            value: 'schedule'
                         }
                     },
                     {
