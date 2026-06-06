@@ -1,0 +1,42 @@
+<div class="table-list-results">
+  <div class="table-list-results__toolbar">
+    <div>
+      <p class="table-list-results__caption">{{::c.data.tableLabel}} の最新 {{::c.data.windowSize}} 件を表示しています。</p>
+    </div>
+    <form class="form-inline table-list-results__search" ng-submit="c.search()">
+      <div class="form-group">
+        <label class="sr-only" for="family-table-keyword">キーワード</label>
+        <input id="family-table-keyword"
+               type="search"
+               class="form-control"
+               ng-model="c.keyword"
+               placeholder="キーワード検索">
+      </div>
+      <button type="submit" class="btn btn-primary">検索</button>
+      <button type="button" class="btn btn-default" ng-if="c.keyword" ng-click="c.clearSearch()">クリア</button>
+    </form>
+  </div>
+
+  <div class="alert alert-danger" ng-if="c.data.errorMessage" role="alert">
+    {{::c.data.errorMessage}}
+  </div>
+
+  <div class="alert alert-info" ng-if="!c.data.errorMessage && !c.data.rows.length" role="status">
+    条件に一致するレコードはありません。テーブルやキーワードを変更して再度お試しください。
+  </div>
+
+  <div class="table-responsive" ng-if="!c.data.errorMessage && c.data.rows.length">
+    <table class="table table-striped table-hover table-condensed">
+      <thead>
+        <tr>
+          <th ng-repeat="column in ::c.data.columns">{{::column.label}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in ::c.data.rows track by row.sysId">
+          <td ng-repeat="cell in ::row.cells track by $index">{{::cell}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
