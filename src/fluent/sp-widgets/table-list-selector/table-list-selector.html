@@ -4,7 +4,7 @@
   </div>
   <div class="panel-body">
     <p class="text-muted table-list-selector__description">
-      表示・検索したいテーブルを選択してください。選択後、下の標準一覧ウィジェットのデータソースが切り替わります。
+      表示・検索したいテーブルを選択して「表示」を押してください。下の標準一覧ウィジェットのデータソースが切り替わります。
     </p>
 
     <form class="form-inline" ng-submit="c.applySelection()">
@@ -13,11 +13,10 @@
         <select id="family-table-selector"
                 class="form-control"
                 ng-model="c.data.selectedTable"
-                ng-options="table.name as table.label for table in c.data.tables track by table.name"
-                ng-change="c.applySelection()">
+                ng-options="table.name as table.label for table in c.data.tables">
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">表示</button>
+      <button type="submit" class="btn btn-primary" ng-disabled="!c.data.selectedTable">表示</button>
     </form>
 
     <div class="alert alert-info table-list-selector__hint" role="status">
