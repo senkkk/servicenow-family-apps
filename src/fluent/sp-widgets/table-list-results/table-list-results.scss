@@ -1,0 +1,27 @@
+.table-list-results__toolbar {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.table-list-results__caption {
+    color: #4f6470;
+    margin: 7px 0 0;
+}
+
+.table-list-results__search {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.table-list-results__search .form-group {
+    margin-bottom: 0;
+}
+
+.table-list-results .table {
+    margin-bottom: 0;
+}

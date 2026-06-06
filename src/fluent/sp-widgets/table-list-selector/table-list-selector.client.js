@@ -12,9 +12,10 @@ function controller($location, $window) {
         var params = angular.copy($location.search()) || {}
         params.id = c.data.pageId || 'family-list-search'
         params.table = selected.name
-        params.filter = selected.filter || ''
-        params.fields = selected.fields || ''
-        params.view = selected.view || 'sp'
+        delete params.filter
+        delete params.fields
+        delete params.view
+        delete params.q
         params.spa = '1'
 
         $window.location.search = c.toQueryString(params)

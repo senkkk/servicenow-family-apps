@@ -244,6 +244,10 @@ declare global {
                         table: 'sys_module'
                         id: '9ebc5e542c444d6db718dcd50d08687b'
                     }
+                    table_list_results_widget: {
+                        table: 'sp_widget'
+                        id: '685474718e0842818ae693a6d84daddf'
+                    }
                     table_list_selector_widget: {
                         table: 'sp_widget'
                         id: '397bb417d0ac482595d34213ead6571c'
