@@ -1,0 +1,27 @@
+<div class="panel panel-default table-list-selector">
+  <div class="panel-heading">
+    <h2 class="panel-title">一覧表示・検索</h2>
+  </div>
+  <div class="panel-body">
+    <p class="text-muted table-list-selector__description">
+      表示・検索したいテーブルを選択してください。選択後、下の標準一覧ウィジェットのデータソースが切り替わります。
+    </p>
+
+    <form class="form-inline" ng-submit="c.applySelection()">
+      <div class="form-group table-list-selector__field">
+        <label for="family-table-selector">テーブル</label>
+        <select id="family-table-selector"
+                class="form-control"
+                ng-model="c.data.selectedTable"
+                ng-options="table.name as table.label for table in c.data.tables track by table.name"
+                ng-change="c.applySelection()">
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">表示</button>
+    </form>
+
+    <div class="alert alert-info table-list-selector__hint" role="status">
+      全文検索や項目指定検索は、下の標準一覧ウィジェットの検索欄・列フィルターを使用してください。
+    </div>
+  </div>
+</div>

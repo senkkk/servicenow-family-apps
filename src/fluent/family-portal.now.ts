@@ -1,6 +1,7 @@
 import '@servicenow/sdk/global'
 import { ServicePortal, SPMenu, SPPage } from '@servicenow/sdk/core'
 import { familyCatalog } from './catalog/family-catalog.now'
+import { tableListSelectorWidget } from './sp-widgets/table-list-selector.now'
 
 const OOTB = {
     theme: {
@@ -9,6 +10,7 @@ const OOTB = {
     widget: {
         approvals: 'f37aa302cb70020000f8d856634c9cfc',
         headerMenu: '5ef595c1cb12020000f8d856634c9c6e',
+        dataTable: '5001b062d7101200b0b044580e6103eb',
         homepageSearch: '200fbd96cb20020000f8d856634c9ca1',
         myRequests: 'f1672671d7301200a9addd173e24d47d',
         recentAndPopularItems: 'sc-recent-popular',
@@ -161,6 +163,76 @@ export const familyPortalHomePage = SPPage({
     ],
 })
 
+
+export const familyPortalListSearchPage = SPPage({
+    pageId: 'family-list-search',
+    title: '一覧表示・検索',
+    shortDescription: 'テーブルを選択して標準一覧ウィジェットで表示・検索するページです。',
+    containers: [
+        {
+            $id: 'family_list_search_container',
+            name: '一覧表示・検索',
+            width: 'container',
+            order: 100,
+            rows: [
+                {
+                    $id: 'family_list_search_selector_row',
+                    order: 100,
+                    columns: [
+                        {
+                            $id: 'family_list_search_selector_column',
+                            size: 12,
+                            sizeXs: 12,
+                            order: 100,
+                            instances: [
+                                {
+                                    $id: 'family_list_search_selector_instance',
+                                    id: 'family-list-search-selector',
+                                    widget: tableListSelectorWidget,
+                                    order: 100,
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    $id: 'family_list_search_table_row',
+                    order: 200,
+                    columns: [
+                        {
+                            $id: 'family_list_search_table_column',
+                            size: 12,
+                            sizeXs: 12,
+                            order: 100,
+                            instances: [
+                                {
+                                    $id: 'family_list_search_table_instance',
+                                    id: 'family-list-search-table',
+                                    title: '検索結果',
+                                    widget: OOTB.widget.dataTable,
+                                    glyph: 'search',
+                                    order: 100,
+                                    widgetParameters: {
+                                        table: 'incident',
+                                        fields: 'number,short_description,state,priority,assigned_to,sys_updated_on',
+                                        filter: 'active=true',
+                                        view: 'sp',
+                                        enable_filter: true,
+                                        show_breadcrumbs: true,
+                                        show_keywords: true,
+                                        show_new: false,
+                                        window_size: 20,
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+})
+
 export const familyPortalMainMenu = SPMenu({
     $id: 'family_portal_main_menu',
     title: 'ファミリーポータルメニュー',
@@ -189,6 +261,14 @@ export const familyPortalMainMenu = SPMenu({
             page: OOTB.page.requests,
             glyph: 'list',
             order: 300,
+        },
+        {
+            $id: 'family_portal_menu_list_search',
+            label: '一覧表示・検索',
+            type: 'page',
+            page: familyPortalListSearchPage,
+            glyph: 'search',
+            order: 350,
         },
         {
             $id: 'family_portal_menu_approvals',

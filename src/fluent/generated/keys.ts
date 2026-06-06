@@ -104,6 +104,34 @@ declare global {
                         table: 'sp_row'
                         id: 'b823cbeb923f4f1580f0ddc675237695'
                     }
+                    family_list_search_container: {
+                        table: 'sp_container'
+                        id: '957f6c37912645cda305e5d35e035cfa'
+                    }
+                    family_list_search_selector_column: {
+                        table: 'sp_column'
+                        id: '8fda821724814580b59b395673778b90'
+                    }
+                    family_list_search_selector_instance: {
+                        table: 'sp_instance'
+                        id: '806fc915af874423b8ee05f9912793ea'
+                    }
+                    family_list_search_selector_row: {
+                        table: 'sp_row'
+                        id: 'eacdd7b6429f4873993d641f827c4ef5'
+                    }
+                    family_list_search_table_column: {
+                        table: 'sp_column'
+                        id: 'e5bdb1c0010943f2ba9df08977f43cfd'
+                    }
+                    family_list_search_table_instance: {
+                        table: 'sp_instance'
+                        id: '58b233d012854371bd371bb217cfc582'
+                    }
+                    family_list_search_table_row: {
+                        table: 'sp_row'
+                        id: '38539cf6cc7a4f419afbc77f5f0fabc3'
+                    }
                     family_portal: {
                         table: 'sp_portal'
                         id: '588c32b53ab34154808b5cf37c455855'
@@ -135,6 +163,10 @@ declare global {
                     family_portal_menu_knowledge: {
                         table: 'sp_rectangle_menu_item'
                         id: '461cf11deef040e78436b2954166071b'
+                    }
+                    family_portal_menu_list_search: {
+                        table: 'sp_rectangle_menu_item'
+                        id: '880801f335bd412bb6eeb0db76d15ff4'
                     }
                     family_portal_menu_my_requests: {
                         table: 'sp_rectangle_menu_item'
@@ -211,6 +243,10 @@ declare global {
                     src_server_script_ts: {
                         table: 'sys_module'
                         id: '9ebc5e542c444d6db718dcd50d08687b'
+                    }
+                    table_list_selector_widget: {
+                        table: 'sp_widget'
+                        id: '397bb417d0ac482595d34213ead6571c'
                     }
                 }
                 composite: [
@@ -451,6 +487,13 @@ declare global {
                         key: {
                             sc_cat_item: 'ed9d3f0c1deb4b76bffecc2118963388'
                             sc_category: '8a2407dafa8140c6924af95efdb2492d'
+                        }
+                    },
+                    {
+                        table: 'sp_page'
+                        id: '5b443f70371843eabbb0cc5154090052'
+                        key: {
+                            id: 'family-list-search'
                         }
                     },
                     {
