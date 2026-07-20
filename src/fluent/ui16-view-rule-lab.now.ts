@@ -316,8 +316,19 @@ Record({
         return;
     }
 
-    var requestType = current.getValue('request_type') || '';
-    var amount = parseFloat((current.getValue('estimated_amount') || '0').toString().replace(/,/g, ''));
+    var url = gs.action.getGlideURI().getMap();
+    var sysId = url.get('sys_id');
+    if (!sysId) {
+        return;
+    }
+
+    var gr = new GlideRecord('x_144721_family_ap_ui16_request');
+    if (!gr.get(sysId)) {
+        return;
+    }
+
+    var requestType = gr.getValue('request_type') || '';
+    var amount = parseFloat((gr.getValue('estimated_amount') || '0').toString().replace(/,/g, ''));
     if (requestType === 'purchase' && !isNaN(amount) && amount >= 10000) {
         answer = 'x_144721_family_ap_high_cost_purchase';
     }
