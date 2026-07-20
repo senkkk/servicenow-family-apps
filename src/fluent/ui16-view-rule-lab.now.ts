@@ -316,19 +316,8 @@ Record({
         return;
     }
 
-    var uri = gs.action.getGlideURI().getMap();
-    var sysId = uri.get('sys_id');
-    if (!sysId || sysId === '-1') {
-        return;
-    }
-
-    var request = new GlideRecord('x_144721_family_ap_ui16_request');
-    if (!request.get(sysId)) {
-        return;
-    }
-
-    var requestType = request.getValue('request_type') || '';
-    var amount = parseFloat((request.getValue('estimated_amount') || '0').toString().replace(/,/g, ''));
+    var requestType = current.getValue('request_type') || '';
+    var amount = parseFloat((current.getValue('estimated_amount') || '0').toString().replace(/,/g, ''));
     if (requestType === 'purchase' && !isNaN(amount) && amount >= 10000) {
         answer = 'x_144721_family_ap_high_cost_purchase';
     }
