@@ -305,7 +305,6 @@ Record({
     data: {
         name: 'UI16 高額購入 View Rule',
         table: TABLE,
-        view: '',
         device_type: 'browser',
         advanced: true,
         active: true,
@@ -318,8 +317,8 @@ Record({
     }
 
     var requestType = current.getValue('request_type') || '';
-    var amount = parseFloat(current.getValue('estimated_amount') || '0');
-    if (requestType === 'purchase' && amount >= 10000) {
+    var amount = parseFloat((current.getValue('estimated_amount') || '0').toString().replace(/,/g, ''));
+    if (requestType === 'purchase' && !isNaN(amount) && amount >= 10000) {
         answer = 'x_144721_family_ap_high_cost_purchase';
     }
 })(view, is_list);`,
@@ -348,7 +347,7 @@ Record({
         name: 'UI16 購入 View Rule',
         table: TABLE,
         view: 'x_144721_family_ap_purchase',
-        condition: 'request_type=purchase^EQ',
+        condition: 'request_type=purchase^estimated_amount<10000^EQ',
         device_type: 'browser',
         active: true,
         overrides_user_preference: true,
