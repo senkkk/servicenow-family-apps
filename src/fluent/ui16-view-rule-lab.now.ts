@@ -305,7 +305,6 @@ Record({
     data: {
         name: 'UI16 高額購入 View Rule',
         table: TABLE,
-        view: '',
         device_type: 'browser',
         advanced: true,
         active: true,
@@ -313,13 +312,24 @@ Record({
         order: 10,
         script: `(function overrideView(view, is_list) {
     answer = null;
-    if (is_list || typeof current === 'undefined') {
+    if (is_list) {
         return;
     }
 
-    var requestType = current.getValue('request_type') || '';
-    var amount = parseFloat(current.getValue('estimated_amount') || '0');
-    if (requestType === 'purchase' && amount >= 10000) {
+    var uri = gs.action.getGlideURI().getMap();
+    var sysId = uri.get('sys_id');
+    if (!sysId || sysId === '-1') {
+        return;
+    }
+
+    var request = new GlideRecord('x_144721_family_ap_ui16_request');
+    if (!request.get(sysId)) {
+        return;
+    }
+
+    var requestType = request.getValue('request_type') || '';
+    var amount = parseFloat((request.getValue('estimated_amount') || '0').toString().replace(/,/g, ''));
+    if (requestType === 'purchase' && !isNaN(amount) && amount >= 10000) {
         answer = 'x_144721_family_ap_high_cost_purchase';
     }
 })(view, is_list);`,
@@ -348,7 +358,7 @@ Record({
         name: 'UI16 購入 View Rule',
         table: TABLE,
         view: 'x_144721_family_ap_purchase',
-        condition: 'request_type=purchase^EQ',
+        condition: 'request_type=purchase^estimated_amount<10000^EQ',
         device_type: 'browser',
         active: true,
         overrides_user_preference: true,
