@@ -311,27 +311,42 @@ Record({
         overrides_user_preference: true,
         order: 10,
         script: `(function overrideView(view, is_list) {
+    var logPrefix = '[UI16 High Cost Purchase View Rule] ';
     answer = null;
+
+    gs.info(logPrefix + 'start: view=' + view + ', is_list=' + is_list);
     if (is_list) {
+        gs.info(logPrefix + 'skip: list context is not eligible for form view override');
         return;
     }
 
-    var url = gs.action.getGlideURI().getMap();
+    var uri = gs.action.getGlideURI();
+    var url = uri.getMap();
     var sysId = url.get('sys_id');
+    gs.info(logPrefix + 'request: uri=' + uri + ', sys_id=' + sysId);
     if (!sysId) {
+        gs.info(logPrefix + 'skip: sys_id is missing from the request URL');
         return;
     }
 
     var gr = new GlideRecord('x_144721_family_ap_ui16_request');
     if (!gr.get(sysId)) {
+        gs.info(logPrefix + 'skip: target record was not found for sys_id=' + sysId);
         return;
     }
 
     var requestType = gr.getValue('request_type') || '';
-    var amount = parseFloat((gr.getValue('estimated_amount') || '0').toString().replace(/,/g, ''));
+    var amountValue = (gr.getValue('estimated_amount') || '0').toString();
+    var amount = parseFloat(amountValue.replace(/,/g, ''));
+    gs.info(logPrefix + 'record: number=' + gr.getValue('number') + ', request_type=' + requestType + ', estimated_amount=' + amountValue + ', parsed_amount=' + amount);
+
     if (requestType === 'purchase' && !isNaN(amount) && amount >= 10000) {
         answer = 'x_144721_family_ap_high_cost_purchase';
+        gs.info(logPrefix + 'match: overriding answer=' + answer);
+        return;
     }
+
+    gs.info(logPrefix + 'no match: leaving answer empty');
 })(view, is_list);`,
     },
 })
