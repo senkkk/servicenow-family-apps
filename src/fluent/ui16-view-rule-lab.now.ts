@@ -312,7 +312,7 @@ Record({
         order: 10,
         script: `(function overrideView(view, is_list) {
     answer = null;
-    if (is_list || typeof current === 'undefined') {
+    if (is_list) {
         return;
     }
 
