@@ -321,9 +321,10 @@ Record({
     }
 
     var uri = gs.action.getGlideURI();
-    var url = uri.getMap();
-    var sysId = url.get('sys_id');
-    gs.info(logPrefix + 'request: uri=' + uri + ', sys_id=' + sysId);
+    var uriString = (uri || '').toString();
+    var sysIdMatch = uriString.match(/[?&]sys_id=([^&]+)/);
+    var sysId = sysIdMatch ? decodeURIComponent(sysIdMatch[1]) : '';
+    gs.info(logPrefix + 'request: uri=' + uriString + ', sys_id=' + sysId);
     if (!sysId) {
         gs.info(logPrefix + 'skip: sys_id is missing from the request URL');
         return;
