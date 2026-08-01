@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-SN_SDK_VERSION="${SN_SDK_VERSION:-4.7.0}"
+SN_SDK_VERSION="${SN_SDK_VERSION:-4.9.0}"
 
 if [ -f .nvmrc ]; then
   export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
