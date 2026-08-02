@@ -8,6 +8,11 @@ During development in Codex Cloud, always validate changes with:
 bash scripts/sn-build.sh
 ```
 
+## Table Text Columns
+
+- テーブルに複数行入力用のテキスト列を追加する場合でも、`MultiLineTextColumn` は使用しないでください。
+- 複数行入力が必要な列は `StringColumn` を使用し、`maxLength` を 256 以上に設定してください。
+
 ## Pull Request Format
 
 Codex Cloud から Pull Request を作成する場合は、GitHub の `.github/pull_request_template.md` だけに依存せず、PR 本文に以下のフォーマットを使用してください。
