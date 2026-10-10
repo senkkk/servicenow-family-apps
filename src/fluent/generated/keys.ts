@@ -172,6 +172,30 @@ declare global {
                         table: 'sp_rectangle_menu_item'
                         id: 'd0f3d422536b4b7493f0d6a428cce22f'
                     }
+                    family_request_process_flow_cancelled: {
+                        table: 'sys_process_flow'
+                        id: '66323f48122e4fc188e36ac1f1cd192b'
+                    }
+                    family_request_process_flow_closed: {
+                        table: 'sys_process_flow'
+                        id: 'feca08c500a041c1b0e43be9bbb47acc'
+                    }
+                    family_request_process_flow_draft: {
+                        table: 'sys_process_flow'
+                        id: 'c6f68597f4664d6b993731ea18d4fc27'
+                    }
+                    family_request_process_flow_formatter: {
+                        table: 'sys_ui_formatter'
+                        id: '7d9c93f716c54cc3a9f32011b17e5bea'
+                    }
+                    family_request_set_creator: {
+                        table: 'sys_script'
+                        id: '60ccce84d1214cde9b0af107900c6dfc'
+                    }
+                    family_request_set_terminal_timestamp: {
+                        table: 'sys_script'
+                        id: '01f7d731a5d241ec818e4e8a95e3b449'
+                    }
                     life_improvement_request_catalog_item: {
                         table: 'sc_cat_item'
                         id: 'ed9d3f0c1deb4b76bffecc2118963388'
@@ -286,6 +310,23 @@ declare global {
                     }
                 }
                 composite: [
+                    {
+                        table: 'sys_ui_list'
+                        id: '0231b580dbe8460cb9ebe83d86d54753'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
+                            element: 'NULL'
+                            relationship: 'NULL'
+                            parent: 'NULL'
+                        }
+                    },
                     {
                         table: 'sys_ui_element'
                         id: '0303c52d119847a58267510692397694'
@@ -455,6 +496,17 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_choice'
+                        id: '06a9be4846b44bd7b491e5fbb044c71e'
+                        key: {
+                            name: 'x_144721_family_ap_ui16_request'
+                            element: 'urgency_level'
+                            value: 'medium'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
                         table: 'question_choice'
                         id: '07a1578cfc5e4cef9f547a7cc08e6f09'
                         key: {
@@ -476,6 +528,17 @@ declare global {
                             cat_item: 'c811a8f00b20461ea46bcfb70ff4a295'
                             variable_set: 'NULL'
                             name: 'request_title'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
+                        id: '0c24651f04194633bd220cc684cf83a1'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'state'
+                            value: '-1'
+                            language: 'en'
+                            dependent_value: 'NULL'
                         }
                     },
                     {
@@ -669,6 +732,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'ua_table_licensing_config'
+                        id: '1c65bbba74ac4cb6a17137fd6143b564'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                        }
+                    },
+                    {
                         table: 'item_option_new'
                         id: '1d5e2e68ef2e496e88dd231f53929009'
                         key: {
@@ -799,6 +869,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: '2a23eaf8bffd4634845dbaa733697bf3'
+                        deleted: true
                         key: {
                             name: 'x_144721_family_ap_ui16_request'
                             element: 'request_type'
@@ -830,6 +901,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: '2aa12eed84d844c182ab06dff1693ebe'
+                        deleted: true
                         key: {
                             name: 'x_144721_family_ap_ui16_request'
                             element: 'urgency_level'
@@ -970,6 +1042,14 @@ declare global {
                     },
                     {
                         table: 'sys_dictionary'
+                        id: '350eea68b29c4dd68e67fc17187a08d1'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'cancelled_at'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
                         id: '35b5d0f1e4f94307ae2f457fcd077893'
                         key: {
                             name: 'x_144721_family_ap_ui16_request'
@@ -996,6 +1076,28 @@ declare global {
                             }
                             element: 'attachment_required'
                             position: '4'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '3b449906fffd47d5852b1be883189f5c'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '.split'
+                            position: '8'
                         }
                     },
                     {
@@ -1041,6 +1143,52 @@ declare global {
                         id: '3e502670086e49e9b02b5f82225dace3'
                         key: {
                             name: 'x_144721_family_ap_high_cost_purchase'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_list_element'
+                        id: '446a1c0344704be1934601fcbae418f9'
+                        key: {
+                            list_id: {
+                                id: '0231b580dbe8460cb9ebe83d86d54753'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                    element: 'NULL'
+                                    relationship: 'NULL'
+                                    parent: 'NULL'
+                                }
+                            }
+                            element: 'state'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_list_element'
+                        id: '4525aebfe54e4f838ee94197b9744ca2'
+                        key: {
+                            list_id: {
+                                id: '0231b580dbe8460cb9ebe83d86d54753'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                    element: 'NULL'
+                                    relationship: 'NULL'
+                                    parent: 'NULL'
+                                }
+                            }
+                            element: 'opened_by'
                         }
                     },
                     {
@@ -1129,6 +1277,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_dictionary'
+                        id: '4f3ba543b2624893aacf6e2ee6330d23'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'state'
+                        }
+                    },
+                    {
                         table: 'sys_ui_list_element'
                         id: '527d9858db7f487faa4f4cf693e89c23'
                         key: {
@@ -1183,8 +1339,32 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_list_element'
+                        id: '571531fa55a44b1da54dd2f22b69b4ff'
+                        key: {
+                            list_id: {
+                                id: '0231b580dbe8460cb9ebe83d86d54753'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                    element: 'NULL'
+                                    relationship: 'NULL'
+                                    parent: 'NULL'
+                                }
+                            }
+                            element: 'sys_created_on'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: '574ad198cd8b47e2a6e323d65484721f'
+                        deleted: true
                         key: {
                             name: 'x_144721_family_ap_ui16_request'
                             element: 'urgency_level'
@@ -1204,6 +1384,29 @@ declare global {
                                 }
                             }
                             value: 'other'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_list_element'
+                        id: '583033c170014541ba9aba600395a258'
+                        key: {
+                            list_id: {
+                                id: '0231b580dbe8460cb9ebe83d86d54753'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                    element: 'NULL'
+                                    relationship: 'NULL'
+                                    parent: 'NULL'
+                                }
+                            }
+                            element: 'cancelled_at'
                         }
                     },
                     {
@@ -1278,6 +1481,17 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_choice'
+                        id: '5b579a6f0b7a4e9dba35734a466d22a5'
+                        key: {
+                            name: 'x_144721_family_ap_ui16_request'
+                            element: 'request_type'
+                            value: 'purchase'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
                         table: 'sys_ui_element'
                         id: '5bc01fd2c7d64e58a3dd3e3b98ca88a2'
                         key: {
@@ -1313,6 +1527,28 @@ declare global {
                         key: {
                             name: 'x_144721_family_ap_ui16_request'
                             element: 'estimated_amount'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '5e526a32ca01470687285986a5c762e2'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '.end_split'
+                            position: '5'
                         }
                     },
                     {
@@ -1391,6 +1627,53 @@ declare global {
                         key: {
                             sc_cat_item: 'c811a8f00b20461ea46bcfb70ff4a295'
                             sc_catalog: 'd8293035f1644bb8b454120fb8829aca'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
+                        id: '6a9b68337448449fb04ed448c245da6c'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'state'
+                            value: '200'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
+                        id: '6ad6f41dc266421db4746601ba13d003'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'state'
+                            value: '100'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '6af1f679169744a2af8da1a5400dad40'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'closed_at'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: '6b92f1e3565348ae9a225356cb081306'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '6bee0e8e33664a46ac9529e387165b5b'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'opened_by'
+                            language: 'en'
                         }
                     },
                     {
@@ -1584,6 +1867,28 @@ declare global {
                             }
                             element: 'short_description'
                             position: '2'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: '7d1bd522d0b64db080d07533af8065bf'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '.split'
+                            position: '3'
                         }
                     },
                     {
@@ -1987,6 +2292,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: '9ba9eb31cdb645e6a6a564f6972f0e59'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'process_flow.xml'
+                            position: '0'
+                        }
+                    },
+                    {
                         table: 'sys_ui_form'
                         id: '9bb59b4c2fac47538884a93236ecf4bf'
                         key: {
@@ -2002,7 +2329,19 @@ declare global {
                     },
                     {
                         table: 'sys_choice'
+                        id: '9bfcf38dfcf249a689aced247177572d'
+                        key: {
+                            name: 'x_144721_family_ap_ui16_request'
+                            element: 'request_type'
+                            value: 'payment'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
                         id: '9c9ecbe5cf284a32a637a7dba1e71330'
+                        deleted: true
                         key: {
                             name: 'x_144721_family_ap_ui16_request'
                             element: 'request_type'
@@ -2068,11 +2407,47 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: 'a1fd4248aa3a41bd886ad5ea3924f4bb'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'closed_at'
+                            position: '7'
+                        }
+                    },
+                    {
                         table: 'm2m_sp_portal_catalog'
                         id: 'a30439759f724fb6a1c0e0168efd5f79'
                         key: {
                             sp_portal: '588c32b53ab34154808b5cf37c455855'
                             sc_catalog: 'd8293035f1644bb8b454120fb8829aca'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_form'
+                        id: 'a37c7efb5af34aaeb02025ec2cac6b9b'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
                         }
                     },
                     {
@@ -2095,6 +2470,17 @@ declare global {
                             }
                             element: 'requested_action'
                             position: '11'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
+                        id: 'a475077cd7524cd8a7845b7bdbb14e11'
+                        key: {
+                            name: 'x_144721_family_ap_ui16_request'
+                            element: 'request_type'
+                            value: 'other'
+                            language: 'en'
+                            dependent_value: 'NULL'
                         }
                     },
                     {
@@ -2215,6 +2601,51 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_list_element'
+                        id: 'abe5f1d0d2f94ff09b0d018aa4c8e44c'
+                        key: {
+                            list_id: {
+                                id: '0231b580dbe8460cb9ebe83d86d54753'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                    element: 'NULL'
+                                    relationship: 'NULL'
+                                    parent: 'NULL'
+                                }
+                            }
+                            element: 'closed_at'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: 'ac2c9c01171745ca8c1ce578281dd861'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'opened_by'
+                            position: '4'
+                        }
+                    },
+                    {
                         table: 'item_option_new'
                         id: 'ac42b52b868a4aeaa5a30c8f34decbff'
                         key: {
@@ -2269,7 +2700,20 @@ declare global {
                     },
                     {
                         table: 'sys_choice'
+                        id: 'af79baaad96e4220b76fe228dc3a17cf'
+                        deleted: true
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'state'
+                            value: '[-1]'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
                         id: 'b019deb4ba004f469eda2c248868f89d'
+                        deleted: true
                         key: {
                             name: 'x_144721_family_ap_ui16_request'
                             element: 'request_type'
@@ -2413,6 +2857,7 @@ declare global {
                     {
                         table: 'sys_choice'
                         id: 'b81641b348e1434ebc5fde88ca851b11'
+                        deleted: true
                         key: {
                             name: 'x_144721_family_ap_ui16_request'
                             element: 'request_type'
@@ -2467,12 +2912,43 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: 'bd211468835048449137db0673b36f28'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'state'
+                            position: '2'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: 'bdb8c0093a8a4bc9b737c338af724b86'
+                        deleted: true
                         key: {
                             name: 'x_144721_family_ap_ui16_request'
                             element: 'urgency_level'
                             value: 'high'
+                        }
+                    },
+                    {
+                        table: 'sys_choice_set'
+                        id: 'bf3a380dd6e941eca3a90b23893a3075'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'state'
                         }
                     },
                     {
@@ -2531,6 +3007,17 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_choice'
+                        id: 'c1a292c4c5354d9f984b1eec1928274c'
+                        key: {
+                            name: 'x_144721_family_ap_ui16_request'
+                            element: 'urgency_level'
+                            value: 'low'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
                         table: 'question_choice'
                         id: 'c47225f7ffcf43f0af5b2a88534548a3'
                         key: {
@@ -2563,6 +3050,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: 'c90c05f2643c4ba78a847b910b2521cb'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'cancelled_at'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_ui_list_element'
                         id: 'cf76b1893d344d579f2470db2f1ae5d8'
                         key: {
@@ -2592,6 +3088,15 @@ declare global {
                             cat_item: '0d2c04d8f9c14bc19802e40abf0bae34'
                             variable_set: 'NULL'
                             name: 'notes'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'd246cce2039e4d2aba409a28ce79e114'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'NULL'
+                            language: 'en'
                         }
                     },
                     {
@@ -2799,6 +3304,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: 'da9b5fda984a48e599b99d25893abbd8'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'state'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'db7769bb0dfe49989d8d9a08c3178fb7'
                         key: {
@@ -2860,6 +3374,39 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_form_section'
+                        id: 'dec4f8942d65445591a8d6c40165bea4'
+                        key: {
+                            sys_ui_form: {
+                                id: 'a37c7efb5af34aaeb02025ec2cac6b9b'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                        }
+                    },
+                    {
                         table: 'sys_ui_element'
                         id: 'dfb255569c384e5b8c36e50232178f2c'
                         key: {
@@ -2901,6 +3448,17 @@ declare global {
                             }
                             element: '.end_split'
                             position: '8'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
+                        id: 'e19d0e71f488491eb51d99df6e2f1ec9'
+                        key: {
+                            name: 'x_144721_family_ap_ui16_request'
+                            element: 'request_type'
+                            value: 'sign_or_submit'
+                            language: 'en'
+                            dependent_value: 'NULL'
                         }
                     },
                     {
@@ -2980,6 +3538,61 @@ declare global {
                     },
                     {
                         table: 'sys_ui_element'
+                        id: 'eede5529b7dc491b9f0c7bc737736630'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '.begin_split'
+                            position: '6'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_section'
+                        id: 'f0381b95c68b4be583a072e5257b1de2'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            caption: '家庭内申請'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
+                        }
+                    },
+                    {
+                        table: 'sys_choice'
+                        id: 'f0825c21d73842608a7d6ee6883af284'
+                        key: {
+                            name: 'x_144721_family_ap_ui16_request'
+                            element: 'urgency_level'
+                            value: 'high'
+                            language: 'en'
+                            dependent_value: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_db_object'
+                        id: 'f0fde5fce8c04ff7880e2101e11b565a'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
                         id: 'f2cd322ae1eb482c8aa663fbc17a9e3d'
                         key: {
                             sys_ui_section: {
@@ -3042,6 +3655,45 @@ declare global {
                             }
                             element: 'assigned_parent'
                             position: '9'
+                        }
+                    },
+                    {
+                        table: 'sys_dictionary'
+                        id: 'f5e512515a4a493d847fba9d8244ba08'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'opened_by'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'f658e047a6a0458ea6a8816dce724268'
+                        key: {
+                            name: 'x_144721_family_ap_request'
+                            element: 'closed_at'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: 'f6aaedde047b411d8a24ed0a067b3845'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '.end_split'
+                            position: '10'
                         }
                     },
                     {
@@ -3137,6 +3789,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_element'
+                        id: 'f950f2eac30543e3a049c651918f0eba'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: 'cancelled_at'
+                            position: '9'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: 'fc06d3dcf61b4644972a0ce556ec5b65'
                         key: {
@@ -3165,6 +3839,28 @@ declare global {
                             }
                             element: '.begin_split'
                             position: '0'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_element'
+                        id: 'ff03647be4154b3dbead093902967cd0'
+                        key: {
+                            sys_ui_section: {
+                                id: 'f0381b95c68b4be583a072e5257b1de2'
+                                key: {
+                                    name: 'x_144721_family_ap_request'
+                                    caption: '家庭内申請'
+                                    view: {
+                                        id: 'Default view'
+                                        key: {
+                                            name: 'NULL'
+                                        }
+                                    }
+                                    sys_domain: 'global'
+                                }
+                            }
+                            element: '.begin_split'
+                            position: '1'
                         }
                     },
                     {
